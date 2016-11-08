@@ -1,0 +1,66 @@
+#!/usr/bin/env Rscript --no-save --no-restore --no-init-file --no-site-file
+# required R packages:
+# optparse, qtl2scan, jsonlite, qtl2convert
+
+library(optparse)
+
+# options
+# -g --genoprobs
+# -p --pheno
+# -a --addcovar
+# -k --kinship
+# -o --output
+# -c --cores
+# -m --ml
+
+# list of options to use
+option_list <- list(
+    make_option(c("-g", "--genoprobs"), action="store", default="genoprobs.rds",
+                help='file with genotype probabilities [default = "%default"]'),
+    make_option(c("-p", "--pheno"), action="store", default="pheno.rds",
+                help='file with phenotypes [default = "%default"]'),
+    make_option(c("-a", "--addcovar"), action="store", default=NULL,
+                help="file with additive covariates"),
+    make_option(c("-k", "--kinship"), action="store", default=NULL,
+                help="file with kinship matrix"),
+    make_option(c("-o", "--output"), action="store", default=NULL,
+                help="file to contain output [if missing, print to stdout]"),
+    make_option(c("-c", "--cores"), action="store", default=1,
+                help="number of compute cores to use"),
+    make_option(c("-m", "--ml"), action="store_true", default=FALSE,
+                help="Use maximum likelihood (otherwise REML)"))
+
+# parse the options
+opt <- parse_args(OptionParser(option_list=option_list))
+
+# read RDS file if provided; otherwise NULL
+read_if_provided <-
+    function(option=NULL)
+{
+    if(is.null(option))
+        return(NULL)
+
+    readRDS(option)
+}
+
+library(qtl2scan)
+
+gp <- readRDS(opt$genoprobs)
+y <- readRDS(opt$pheno)
+a <- read_if_provided(opt$addcovar)
+k <- read_if_provided(opt$kinship)
+opt$reml <- !opt$ml
+
+result <- scan1(gp, y, kinship=k, addcovar=a, cores=opt$cores, reml=opt$reml)
+
+if(is.null(opt$output)) {
+    # scan1 to table, in JSON
+    library(qtl2convert)
+    library(jsonlite)
+    result <- cbind(map_list_to_df(result$map),
+                    result$lod)
+    rownames(result) <- NULL
+    toJSON(result)
+} else {
+    saveRDS(result, file=opt$output)
+}
