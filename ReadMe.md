@@ -10,7 +10,7 @@ Currently, it can just do one thing:
   - run `scan1`
   - if an (RDS) output file name is provided, save the results to that; otherwise, print them to stdout as JSON
 
-The file `[create_example.R](create_example.R)` contains code to create the `genoprobs.rds` and `pheno.rds` files for the [B6xBTBR data](https://github.com/rqtl/qtl2data/tree/master/B6BTBR).
+The file [`create_example.R`](create_example.R) contains code to create the `genoprobs.rds` and `pheno.rds` files for the [B6xBTBR data](https://github.com/rqtl/qtl2data/tree/master/B6BTBR).
 
 So you might try:
 
