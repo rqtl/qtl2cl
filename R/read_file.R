@@ -16,11 +16,11 @@
 read_file <-
     function(file, ...)
 {
-    tmp <- strsplit("\\.", file)[[1]]
+    tmp <- strsplit(file, "\\.")[[1]]
     file_extension <- tmp[length(tmp)]
     switch(file_extension,
            "csv" = qtl2geno::read_csv(file, ...),
            "rds" = readRDS(file),
-           "json" = jsonlite::fromJSON(scan(file, what=character())),
+           "json" = jsonlite::fromJSON( readLines(file) ),
            stop("Can't handle file extension ", file_extension))
 }
