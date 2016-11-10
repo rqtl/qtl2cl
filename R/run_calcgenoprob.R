@@ -17,7 +17,7 @@
 #' \dontrun{cross2rds(input_file, "b6btbr.rds")}
 #' \dontrun{run_calcgenoprob("b6btbr.rds", "b6btbr_probs.rds")}
 run_calcgenoprob <-
-    function(input_file, output_file, ...)
+    function(cross_file, output_file, ...)
 {
-    saveRDS( qtl2geno::calc_genoprob( readRDS(input_file), ...), file=output_file )
+    saveRDS( qtl2geno::calc_genoprob( readRDS(cross_file), ...), file=output_file )
 }

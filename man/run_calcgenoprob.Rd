@@ -4,14 +4,14 @@
 \alias{run_calcgenoprob}
 \title{Run calc_genoprob and save result to rds}
 \usage{
-run_calcgenoprob(input_file, output_file, ...)
+run_calcgenoprob(cross_file, output_file, ...)
 }
 \arguments{
+\item{cross_file}{Character string with path to RDS file containing cross}
+
 \item{output_file}{Character string with path to RDS file for output}
 
 \item{...}{Passed to \code{\link[qtl2geno]{calc_genoprob}}}
-
-\item{cross_file}{Character string with path to RDS file containing cross}
 }
 \value{
 Name of output file

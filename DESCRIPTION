@@ -8,11 +8,12 @@ Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 Depends:
     R (>= 3.1.0)
 Imports:
-    optparse,
+    qtl2geno (>= 0.4-23),
     qtl2scan,
-    qtl2geno,
+    qtl2convert,
+    optparse,
     jsonlite,
-    qtl2convert
+    data.table
 Suggests:
     testthat,
     devtools,
