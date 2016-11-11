@@ -10,8 +10,10 @@
 #' @return Could be most anything; whatever gets read in by the
 #' corresponding R function for the file type. See Details.
 #'
-#' @details For CSV files, we use \code{\link[qtl2geno]{read_csv}}, which calls
-#' \code{\link[data.table]{fread}} with a particular set of options.
+#' @details For CSV files, we use \code{\link[qtl2geno]{read_csv}},
+#' which calls \code{\link[data.table]{fread}} with a particular set
+#' of options; note that columns are forced to be numeric in this
+#' case.
 #' For RDS files, we use \code{\link[base]{readRDS}}. For JSON files,
 #' we use \code{\link[base]{readLines}} and
 #' \code{\link[jsonlite]{fromJSON}}. For YAML files, we use
@@ -32,10 +34,19 @@ read_file <-
 {
     tmp <- strsplit(file, "\\.")[[1]]
     file_extension <- tmp[length(tmp)]
-    switch(file_extension,
-           "csv" = qtl2geno::read_csv(file, ...),
-           "rds" = readRDS(file),
-           "json" = jsonlite::fromJSON( readLines(file) ),
-           "yaml" = yaml::yaml.load_file(filename),
-           stop("Can't handle file extension ", file_extension))
+    result <- switch(file_extension,
+                     "csv" = qtl2geno::read_csv(file, ...),
+                     "rds" = readRDS(file),
+                     "json" = jsonlite::fromJSON( readLines(file) ),
+                     "yaml" = yaml::yaml.load_file(filename),
+                     stop("Can't handle file extension ", file_extension))
+
+    # for CSV, make sure all of the columns are numeric
+    if(file_extension=="csv") {
+        rn <- rownames(result)
+        result <- as.data.frame(lapply(result, as.numeric))
+        rownames(result) <- rn
+    }
+
+    result
 }
