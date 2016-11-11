@@ -2,6 +2,8 @@
 
 [Karl Broman](http://kbroman.org)
 
+[![Build Status](https://travis-ci.org/rqtl/qtl2cl.svg?branch=master)](https://travis-ci.org/rqtl/qtl2cl)
+
 [qtl2cl](https://github.com/rqtl/qtl2cl) is a command-line interface
 to a restricted set of [R/qtl2](http://kbroman.org/qtl2) functions.
 
