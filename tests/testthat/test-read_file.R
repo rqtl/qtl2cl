@@ -32,3 +32,33 @@ test_that("read_file works for a CSV file", {
     unlink(file)
 
 })
+
+
+test_that("read_file works for a JSON file", {
+
+    x <- list(a=1:100, b=3, c=sample(letters, 5),
+              d=list(a=1, b=1:5))
+    file <- paste0(tempfile(), ".json")
+
+    cat(jsonlite::toJSON(x), "\n", file=file)
+
+    expect_equal(read_file(file), x)
+
+    unlink(file)
+
+})
+
+
+test_that("read_file works for a YAML file", {
+
+    x <- list(a=1:100, b=3, c=sample(letters, 5),
+              d=list(a=1, b=1:5))
+    file <- paste0(tempfile(), ".yaml")
+
+    cat(yaml::as.yaml(x), "\n", file=file)
+
+    expect_equal(read_file(file), x)
+
+    unlink(file)
+
+})

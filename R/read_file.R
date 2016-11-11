@@ -38,7 +38,7 @@ read_file <-
                      "csv" = qtl2geno::read_csv(file, ...),
                      "rds" = readRDS(file),
                      "json" = jsonlite::fromJSON( readLines(file) ),
-                     "yaml" = yaml::yaml.load_file(filename),
+                     "yaml" = yaml::yaml.load_file(file),
                      stop("Can't handle file extension ", file_extension))
 
     # for CSV, make sure all of the columns are numeric
