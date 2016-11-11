@@ -7,16 +7,31 @@
 read_file(file, ...)
 }
 \arguments{
-\item{file}{Character string of input file path}
+\item{file}{Character string of input file; must have file
+extension \code{.rds}, \code{.csv}, \code{.json}, or \code{.yaml}.}
 
 \item{...}{Passed to whatever function it calls}
 }
+\value{
+Could be most anything; whatever gets read in by the
+corresponding R function for the file type. See Details.
+}
 \description{
-Read a file that is either RDS, CSV, or JSON, with the method determined by the file extension.
+Read a file that is either RDS, CSV, JSON, or YAML, with the method
+determined by the file extension.
+}
+\details{
+For CSV files, we use \code{\link[qtl2geno]{read_csv}}, which calls
+\code{\link[data.table]{fread}} with a particular set of options.
+For RDS files, we use \code{\link[base]{readRDS}}. For JSON files,
+we use \code{\link[base]{readLines}} and
+\code{\link[jsonlite]{fromJSON}}. For YAML files, we use
+\code{\link[yaml]{yaml.load_file}}.
 }
 \examples{
-\dontrun{x <- read_file("myfile.rds")}
-\dontrun{y <- read_file("myfile.csv")}
-\dontrun{z <- read_file("myfile.json")}
+\dontrun{w <- read_file("myfile.rds")
+x <- read_file("myfile.csv")
+y <- read_file("myfile.json")
+z <- read_file("myfile.yaml")}
 }
 

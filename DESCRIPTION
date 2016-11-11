@@ -13,7 +13,7 @@ Imports:
     qtl2convert,
     optparse,
     jsonlite,
-    data.table
+    yaml
 Suggests:
     testthat,
     devtools,
