@@ -12,6 +12,8 @@ option_list <- list(
                 help="Convert genotype probabilities to allele dosages"),
     make_option("--calc_kinship", action="store_true", type="logical", default=FALSE,
                 help="Calculate kinship matrix"),
+    make_option("--get_x_covar", action="store_true", type="logical", default=FALSE,
+                help="Get X chromosome covariates"),
     make_option("--scan1", action="store_true", type="logical", default=FALSE,
                 help="Run a single-QTL genome scan"),
     make_option(c("-i", "--input"), action="store", type="character",
@@ -71,7 +73,7 @@ opt <- parse_args(OptionParser(option_list=option_list))
 
 # can have just one of the main options
 main_opts <- c("cross2rds", "calc_genoprob", "genoprob_to_alleleprob",
-               "calc_kinship", "scan1")
+               "calc_kinship", "get_x_covar", "scan1")
 
 if(sum(unlist(opt[main_opts])) != 1) {
     stop("Provide exactly one of these options:\n",
@@ -87,6 +89,15 @@ if(opt$cross2rds) {
         stop("Provide output file name (RDS file)")
 
     qtl2cl::cross2rds(opt$input, opt$output)
+
+} else if(opt$get_x_covar) {
+
+    if(is.null(opt$input) || opt$input == "")
+        stop("Provide input file name (cross object as RDS file)")
+    if(is.null(opt$output) || opt$output == "")
+        stop("Provide output file name (RDS file)")
+
+    qtl2cl::run_getXcovar(opt$input, opt$output)
 
 } else if(opt$calc_genoprob) {
 
