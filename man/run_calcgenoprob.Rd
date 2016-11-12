@@ -4,17 +4,43 @@
 \alias{run_calcgenoprob}
 \title{Run calc_genoprob and save result to rds}
 \usage{
-run_calcgenoprob(cross_file, output_file, ...)
+run_calcgenoprob(cross_file, output_file, step = 0, off_end = 0,
+  stepwidth = c("fixed", "max"), error_prob = 0.0001,
+  map_function = c("haldane", "kosambi", "c-f", "morgan"), lowmem = FALSE,
+  quiet = TRUE, cores = 1)
 }
 \arguments{
 \item{cross_file}{Character string with path to RDS file containing cross}
 
 \item{output_file}{Character string with path to RDS file for output}
 
-\item{...}{Passed to \code{\link[qtl2geno]{calc_genoprob}}}
-}
-\value{
-Name of output file
+\item{step}{Distance between pseudomarkers and markers; if
+\code{step=0} no pseudomarkers are inserted.}
+
+\item{off_end}{Distance beyond terminal markers in which to insert
+pseudomarkers.}
+
+\item{stepwidth}{Indicates whether to use a fixed grid
+(\code{stepwidth="fixed"}) or to use the maximal distance between
+pseudomarkers to ensure that no two adjacent markers/pseudomarkers
+are more than \code{step} apart.}
+
+\item{error_prob}{Assumed genotyping error probability}
+
+\item{map_function}{Character string indicating the map function to
+use to convert genetic distances to recombination fractions.}
+
+\item{lowmem}{If \code{FALSE}, split individuals into groups with
+common sex and crossinfo and then precalculate the transition
+matrices for a chromosome; potentially a lot faster but using more
+memory.}
+
+\item{quiet}{If \code{FALSE}, print progress messages.}
+
+\item{cores}{Number of CPU cores to use, for parallel calculations.
+(If \code{0}, use \code{\link[parallel]{detectCores}}.)
+Alternatively, this can be links to a set of cluster sockets, as
+produced by \code{\link[parallel]{makeCluster}}.}
 }
 \description{
 Run calc_genoprob and save result to rds
