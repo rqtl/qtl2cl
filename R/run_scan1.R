@@ -47,9 +47,12 @@ run_scan1 <-
 
     if(is.null(output_file)) {
         tab <- qtl2convert::scan_qtl2_to_qtl(result)
-        print( cbind(marker=rownames(tab),
-                     as.data.frame(tab)),
-              row.names=FALSE)
+        tab <- cbind(marker=rownames(tab),
+                     as.data.frame(tab))
+        rownames(tab) <- NULL
+
+        # print as JSON
+        cat(jsonlite::toJSON(tab), "\n")
     }
     else {
         saveRDS(result, file=output_file)
