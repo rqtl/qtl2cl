@@ -63,10 +63,9 @@ calculations is through the following arguments:
 
 Here's an example using the
 [B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
-data. We split it into two lines to make it easier to read.
+data.
 
-    qtl2cl --calc_genoprob --input=b6btbr.rds --output=b6btbr_probs.rds \
-        --step=0.5 --stepwidth=max --error_prob=0.002 --map_function=c-f
+    qtl2cl --calc_genoprob --input=b6btbr.rds --output=b6btbr_probs.rds --step=0.5 --stepwidth=max --error_prob=0.002 --map_function=c-f
 
 #### Convert genotype probabilities to allele dosages
 
