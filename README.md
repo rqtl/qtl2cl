@@ -39,7 +39,7 @@ packages within your R installation. You may want to add this to your
 Currently, the command-line interface to R/qtl2 can do the following
 five things.
 
-#### `--cross2rds`
+#### Import cross data and save to RDS file
 
 With the option `--cross2rds`, you can load data for a cross and save
 the resulting `"cross2"` object to an RDS file. For example, we can
@@ -49,13 +49,30 @@ data and save it to a local RDS file.
 
     qtl2cl --cross2rds --input=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr.zip --output=b6btbr.rds
 
-#### `--calc_genoprob`
+#### Calculate genotype probabilities
 
-#### `--genoprob_to_alleleprob`
+With the option `--calc_genoprob`, you can load data for a cross from
+an RDS file and calculate QTL genotype probabilities. Control of the
+calculations is through the following arguments:
+- `--step`
+- `--off_end`
+- `--stepwidth`
+- `--error_prob`
+- `--map_function`
+- `--cores`
 
-#### `--calc_kinship`
+Here's an example using the
+[B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
+data. We split it into two lines to make it easier to read.
 
-#### `--scan1`
+    qtl2cl --calc_genoprob --input=b6btbr.rds --output=b6btbr_probs.rds \
+        --step=0.5 --stepwidth=max --error_prob=0.002 --map_function=c-f
+
+#### Convert genotype probabilities to allele dosages
+
+#### Calculate kinship matrices
+
+#### Perform single-QTL genome scan
 
 ---
 
