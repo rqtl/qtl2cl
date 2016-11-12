@@ -15,9 +15,6 @@ directory and then read.}
 
 \item{output_file}{Character string with path to RDS file for output}
 }
-\value{
-Name of output file
-}
 \description{
 Read cross files and save as rds
 }

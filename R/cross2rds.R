@@ -9,8 +9,6 @@
 #' directory and then read.
 #' @param output_file Character string with path to RDS file for output
 #'
-#' @return Name of output file
-#'
 #' @importFrom qtl2geno read_cross2
 #' @export
 #'
