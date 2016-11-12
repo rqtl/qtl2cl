@@ -30,7 +30,10 @@ package.
 The command-line script will be located at
 `$R_LIBS/qtl2cl/scripts/qtl2cl` where `$R_LIBS` is the path to the R
 packages within your R installation. You may want to add this to your
-`PATH`.
+`PATH`. Once you've installed the R/qtl2cl package, you can use the following to
+find the path to the `qtl2cl` script.
+
+    Rscript -e "system.file('scripts', 'qtl2cl', package='qtl2cl')"
 
 ---
 
@@ -69,9 +72,60 @@ data.
 
 #### Convert genotype probabilities to allele dosages
 
+With the option `--genoprob_to_alleleprob`, you can convert genotype
+probabilities to allele dosages. This is useful for performing a
+genome scan with an additive allele model. The allele dosages can also
+be used to calculate the kinship matrix.
+
+Here's an example using the
+[B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
+data.
+
+    qtl2cl --genoprob_to_alleleprob --input=b6btbr_probs.rds --output=b6btbr_aprobs.rds
+
+
 #### Calculate kinship matrices
 
+With the option `--calc_kinship`, you can calculate a kinship matrix
+from previously calculated genotype or allele probabilities.  These
+are used in a linear mixed model to adjust for background polygenic
+effects. Control of the calculations is through the following
+arguments:
+- `--type` (`overall`, `loco`, or `chr`)
+- `--use_grid_only`
+- `--omit_x`
+- `--use_allele_probs`
+- `--normalize`
+
+Here's an example using the
+[B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
+data.
+
+    qtl2cl --calc_kinship --input=b6btbr_aprobs.rds --output=b6btbr_kinship.rds
+
+
 #### Perform single-QTL genome scan
+
+With the option `--scan1`, you can perform a single-QTL genome scan.
+The minimal inputs are genotype (or allele) probabilities and
+phenotypes. You can also provide additive covariates, interactive
+covariates, special X chromosome covariates, kinship matrices, and
+weights. Each of these is provided as a file name, which may be for a CSV,
+RDS, JSON, or YAML file (except for the genotype probabilities, which
+must be in an RDS file). In each case, the contents should be a
+rectangle of numeric values with a header row and with the first
+column being a set of individual identifiers.
+
+If an output file is provided, the results are saved as an RDS
+file. If no output file is provided, the results are printed to STDOUT
+as JSON.
+
+Here's an example using the
+[B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
+data, with the phenotypes grabbed from the web.
+
+    qtl2cl --scan1 --genoprobs=b6btbr_aprobs.rds --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv --output=b6btbr_scan.rds
+
 
 ---
 
