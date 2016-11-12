@@ -40,7 +40,7 @@ find the path to the `qtl2cl` script.
 ### Usage
 
 Currently, the command-line interface to R/qtl2 can do the following
-five things.
+things.
 
 #### Import cross data and save to RDS file
 
@@ -104,6 +104,19 @@ data.
     qtl2cl --calc_kinship --input=b6btbr_aprobs.rds --output=b6btbr_kinship.rds
 
 
+#### Grab X chromosome covariates
+
+With the option `--get_x_covar`, you can grab the special X chromosome
+covariates needed for QTL analysis with some cross types. The input is
+a cross object saved as an RDS file. The result is saved to another
+RDS file.
+
+Here's an example using the
+[B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
+data.
+
+    qtl2cl --get_x_covar --input=b6btbr.rds --output=b6btbr_xcovar.rds
+
 #### Perform single-QTL genome scan
 
 With the option `--scan1`, you can perform a single-QTL genome scan.
@@ -122,9 +135,13 @@ as JSON.
 
 Here's an example using the
 [B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
-data, with the phenotypes grabbed from the web.
+data, with the phenotypes grabbed from the web and the X chromosome
+covariates derived above (with `qtl2cl --get_x_covar`). We've split
+the command across two lines, because the URL for phenotypes is so
+long.
 
-    qtl2cl --scan1 --genoprobs=b6btbr_aprobs.rds --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv --output=b6btbr_scan.rds
+    qtl2cl --scan1 --genoprobs=b6btbr_aprobs.rds --Xcovar=b6btbr_xcovar.rds --output=b6btbr_scan.rds \
+        --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv
 
 
 ---
