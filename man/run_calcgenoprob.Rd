@@ -6,8 +6,7 @@
 \usage{
 run_calcgenoprob(cross_file, output_file, step = 0, off_end = 0,
   stepwidth = c("fixed", "max"), error_prob = 0.0001,
-  map_function = c("haldane", "kosambi", "c-f", "morgan"), lowmem = FALSE,
-  quiet = TRUE, cores = 1)
+  map_function = c("haldane", "kosambi", "c-f", "morgan"), cores = 1)
 }
 \arguments{
 \item{cross_file}{Character string with path to RDS file containing cross}
@@ -29,13 +28,6 @@ are more than \code{step} apart.}
 
 \item{map_function}{Character string indicating the map function to
 use to convert genetic distances to recombination fractions.}
-
-\item{lowmem}{If \code{FALSE}, split individuals into groups with
-common sex and crossinfo and then precalculate the transition
-matrices for a chromosome; potentially a lot faster but using more
-memory.}
-
-\item{quiet}{If \code{FALSE}, print progress messages.}
 
 \item{cores}{Number of CPU cores to use, for parallel calculations.
 (If \code{0}, use \code{\link[parallel]{detectCores}}.)

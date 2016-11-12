@@ -4,14 +4,12 @@
 \alias{run_gp2ap}
 \title{Run genoprob_to_alleleprob}
 \usage{
-run_gp2ap(input_file, output_file, quiet = TRUE, cores = 1)
+run_gp2ap(input_file, output_file, cores = 1)
 }
 \arguments{
 \item{input_file}{Name of input file (should be RDS)}
 
 \item{output_file}{Name of output file (will be RDS)}
-
-\item{quiet}{IF \code{FALSE}, print progress messages.}
 
 \item{cores}{Number of CPU cores to use, for parallel calculations.
 (If \code{0}, use \code{\link[parallel]{detectCores}}.)

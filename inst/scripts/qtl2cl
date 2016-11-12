@@ -1,66 +1,84 @@
 #!/usr/bin/env Rscript --no-save --no-restore --no-init-file --no-site-file
-# required R packages:
-# optparse, qtl2scan, jsonlite, qtl2convert
-
+library(qtl2cl)
 library(optparse)
 
-# options
-# -g --genoprobs
-# -p --pheno
-# -a --addcovar
-# -k --kinship
-# -o --output
-# -c --cores
-# -m --ml
+
+# --calc_genoprob
+#   --input
+#   --output
+
+# --genoprob_to_alleleprob
+#   --input
+#   --output
+#   --quiet
+#   --cores
+
+# --calc_kinship
+#   --input
+#   --output
+#   --type (overall, loco, chr)
+#   --use_grid_only
+#   --omit_x
+#   --use_allele_probs
+#   --normalize
+#   --quiet
+#   --cores
+
+# --scan1
+#   --genoprobs
+#   --pheno
+#   --output
+#   --addcovar
+#   --Xcovar
+#   --intcovar
+#   --weights
+#   --reml
+#   --cores
+
 
 # list of options to use
 option_list <- list(
-    make_option(c("-g", "--genoprobs"), action="store", default="genoprobs.rds",
-                help='file with genotype probabilities [default = "%default"]'),
-    make_option(c("-p", "--pheno"), action="store", default="pheno.rds",
-                help='file with phenotypes [default = "%default"]'),
-    make_option(c("-a", "--addcovar"), action="store", default=NULL,
-                help="file with additive covariates"),
-    make_option(c("-k", "--kinship"), action="store", default=NULL,
-                help="file with kinship matrix"),
-    make_option(c("-o", "--output"), action="store", default=NULL,
-                help="file to contain output [if missing, print to stdout]"),
-    make_option(c("-c", "--cores"), action="store", default=1,
-                help="number of compute cores to use"),
-    make_option(c("-m", "--ml"), action="store_true", default=FALSE,
-                help="Use maximum likelihood (otherwise REML)"))
+    make_option("--cross2rds", action="store_true", type="logical",
+                help="Import cross data and save to RDS file. [Also give --input and --output]"),
+    make_option("--calc_genoprob", action="store_true", type="logical",
+                help="Calculate genotype probabilities"),
+    make_option("--genoprob_to_alleleprob", action="store_true", type="logical",
+                help="Convert genotype probabilities to allele dosages"),
+    make_option("--calc_kinship", action="store_true", type="logical",
+                help="Calculate kinship matrix"),
+    make_option("--scan1", action="store_true", type="logical",
+                help="Run a single-QTL genome scan"),
+    make_option(c("-i", "--input"), action="store", type="character",
+                help="Input file [not used with --scan1]"),
+    make_option(c("-o", "--output"), action="store", type="character",
+                help="Output file")
+    make_option("--step", action="store", type="double", default=0,
+                help="For --calc_genoprob, distance between pseudomarkers"),
+    make_option("--off_end", action="store", type="double", default=0,
+                help="For --calc_genoprob, distance beyond terminal markers in which to insert pseudomarkers"),
+    make_option("--stepwidth", action="store", type="character", default="fixed",
+                help="For --calc_genoprob, indicates how to place pseudomarkers"),
+    make_option("--error_prob", action="store", type="double", default=1e-14,
+                help="For --calc_genoprob, assumed genotyping error probability"),
+    make_option("--map_function", action="store", type="character", default="haldane",
+                help="For --calc_genoprob, the genetic map function"),
+
+#   --stepwidth (fixed, max)
+#   --error_prob
+#   --map_function
+#   --lowmem
+#   --quiet
+#   --cores
+
+
+    )
 
 # parse the options
 opt <- parse_args(OptionParser(option_list=option_list))
 
-# read RDS file if provided; otherwise NULL
-read_if_provided <-
-    function(option=NULL)
-{
-    if(is.null(option))
-        return(NULL)
-
-    readRDS(option)
-}
-
-library(qtl2scan)
-
-gp <- readRDS(opt$genoprobs)
-y <- readRDS(opt$pheno)
-a <- read_if_provided(opt$addcovar)
-k <- read_if_provided(opt$kinship)
-opt$reml <- !opt$ml
-
-result <- scan1(gp, y, kinship=k, addcovar=a, cores=opt$cores, reml=opt$reml)
-
-if(is.null(opt$output)) {
-    # scan1 to table, in JSON
-    library(qtl2convert)
-    library(jsonlite)
-    result <- cbind(map_list_to_df(result$map),
-                    result$lod)
-    rownames(result) <- NULL
-    toJSON(result)
-} else {
-    saveRDS(result, file=opt$output)
-}
+# can have just one of the main options
+main_opts <- c("cross2rds", "calc_genoprob", "genoprob_to_alleleprob",
+               "calc_kinship", "scan1")
+if(sum(unlist(opt[main_opts])) != 1)
+    stop("Provide just one of these options:\n",
+         paste(paste0("  --", main_opts), collapse="\n"))

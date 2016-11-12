@@ -6,7 +6,7 @@
 \usage{
 run_calckinship(input_file, output_file, type = c("overall", "loco", "chr"),
   use_grid_only = TRUE, omit_x = FALSE, use_allele_probs = TRUE,
-  normalize = FALSE, quiet = TRUE, cores = 1)
+  normalize = FALSE, cores = 1)
 }
 \arguments{
 \item{input_file}{Input RDS file containing genotype or allele probabilities}
@@ -32,8 +32,6 @@ probabilities.}
 
 \item{normalize}{If \code{TRUE}, divide the kinship matrix by a
 normalizing constant (see Details).}
-
-\item{quiet}{IF \code{FALSE}, print progress messages.}
 
 \item{cores}{Number of CPU cores to use, for parallel calculations.
 (If \code{0}, use \code{\link[parallel]{detectCores}}.)

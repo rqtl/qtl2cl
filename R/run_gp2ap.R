@@ -5,7 +5,6 @@
 #'
 #' @param input_file Name of input file (should be RDS)
 #' @param output_file Name of output file (will be RDS)
-#' @param quiet IF \code{FALSE}, print progress messages.
 #' @param cores Number of CPU cores to use, for parallel calculations.
 #' (If \code{0}, use \code{\link[parallel]{detectCores}}.)
 #' Alternatively, this can be links to a set of cluster sockets, as
@@ -21,9 +20,9 @@
 #' \dontrun{run_calcgenoprob("b6btbr.rds", "b6btbr_probs.rds")}
 #' \dontrun{run_gp2ap("b6btbr_probs.rds", "b6btbr_aprobs.rds")}
 run_gp2ap <-
-    function(input_file, output_file, quiet=TRUE, cores=1)
+    function(input_file, output_file, cores=1)
 {
     saveRDS( qtl2geno::genoprob_to_alleleprob( readRDS(input_file),
-                                              quiet=quiet, cores=cores),
+                                              quiet=TRUE, cores=cores),
             file=output_file)
 }

@@ -15,11 +15,6 @@
 #' @param error_prob Assumed genotyping error probability
 #' @param map_function Character string indicating the map function to
 #' use to convert genetic distances to recombination fractions.
-#' @param lowmem If \code{FALSE}, split individuals into groups with
-#' common sex and crossinfo and then precalculate the transition
-#' matrices for a chromosome; potentially a lot faster but using more
-#' memory.
-#' @param quiet If \code{FALSE}, print progress messages.
 #' @param cores Number of CPU cores to use, for parallel calculations.
 #' (If \code{0}, use \code{\link[parallel]{detectCores}}.)
 #' Alternatively, this can be links to a set of cluster sockets, as
@@ -36,7 +31,7 @@
 run_calcgenoprob <-
     function(cross_file, output_file, step=0, off_end=0, stepwidth=c("fixed", "max"),
          error_prob=1e-4, map_function=c("haldane", "kosambi", "c-f", "morgan"),
-         lowmem=FALSE, quiet=TRUE, cores=1)
+         cores=1)
 {
     stepwidth <- match.arg(stepwidth)
     map_function <- match.arg(map_function)
@@ -44,6 +39,6 @@ run_calcgenoprob <-
     saveRDS( qtl2geno::calc_genoprob( readRDS(cross_file),
                                      step=step, off_end=off_end, stepwidth=stepwidth,
                                      error_prob=error_prob, map_function=map_function,
-                                     lowmem=lowmem, quiet=quiet, cores=cores),
+                                     lowmem=FALSE, quiet=TRUE, cores=cores),
             file=output_file )
 }
