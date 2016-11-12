@@ -75,9 +75,14 @@ opt <- parse_args(OptionParser(option_list=option_list))
 main_opts <- c("cross2rds", "calc_genoprob", "genoprob_to_alleleprob",
                "calc_kinship", "get_x_covar", "scan1")
 
-if(sum(unlist(opt[main_opts])) != 1) {
-    stop("Provide exactly one of these options:\n",
-         paste(paste0("  --", main_opts), collapse="\n"))
+n_main_opts <- sum(unlist(opt[main_opts]))
+if(n_main_opts != 1) {
+    main_opts <- paste(paste0("  --", main_opts), collapse="\n")
+
+    if(n_main_opts == 0)
+        stop("Provide one of these options (or --help for help):\n", main_opts)
+
+    stop("Provide just one of these options:\n", main_opts)
 }
 
 
@@ -146,10 +151,5 @@ if(opt$cross2rds) {
               addcovar_file=opt$addcovar, Xcovar_file=opt$Xcovar,
               intcovar_file=opt$intcovar, weights_file=opt$weights,
               reml=opt$reml, cores=opt$cores)
-
-} else {
-
-    stop("Provide exactly one of these options:\n",
-         paste(paste0("  --", main_opts), collapse="\n"))
 
 }
