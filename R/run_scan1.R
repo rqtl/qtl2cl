@@ -13,6 +13,7 @@
 #' @param reml If TRUE, use REML; otherwise, use maximum likelihood
 #' @param cores Number of CPU cores to use
 #'
+#' @importFrom qtl2scan scan1
 #' @importFrom qtl2convert scan_qtl2_to_qtl
 #' @export
 run_scan1 <-
@@ -35,14 +36,14 @@ run_scan1 <-
             else return(read_file(filename))
         }
 
-    result <- scan1(genoprobs=read_file(genoprobs_file),
-                    pheno=read_file(pheno_file),
-                    kinship=read_file0(kinship_file),
-                    addcovar=read_file0(addcovar_file),
-                    Xcovar=read_file0(Xcovar_file),
-                    intcovar=read_file0(intcovar_file),
-                    weights=read_file0(weights_file),
-                    reml=reml, cores=cores)
+    result <- qtl2scan::scan1(genoprobs=read_file(genoprobs_file),
+                              pheno=read_file(pheno_file),
+                              kinship=read_file0(kinship_file),
+                              addcovar=read_file0(addcovar_file),
+                              Xcovar=read_file0(Xcovar_file),
+                              intcovar=read_file0(intcovar_file),
+                              weights=read_file0(weights_file),
+                              reml=reml, cores=cores)
 
     if(is.null(output_file)) {
         tab <- qtl2convert::scan_qtl2_to_qtl(result)
