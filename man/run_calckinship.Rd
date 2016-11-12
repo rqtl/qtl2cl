@@ -4,14 +4,39 @@
 \alias{run_calckinship}
 \title{Calculate kinship matrix}
 \usage{
-run_calckinship(input_file, output_file, ...)
+run_calckinship(input_file, output_file, type = c("overall", "loco", "chr"),
+  use_grid_only = TRUE, omit_x = FALSE, use_allele_probs = TRUE,
+  normalize = FALSE, cores = 1)
 }
 \arguments{
 \item{input_file}{Input RDS file containing genotype or allele probabilities}
 
 \item{output_file}{Output RDS file for calculated kinship matrix}
 
-\item{...}{Passed to \code{\link[qtl2geno]{calc_kinship}}.}
+\item{type}{Indicates whether to calculate the overall kinship
+(\code{"overall"}, using all chromosomes), the kinship matrix
+leaving out one chromosome at a time (\code{"loco"}), or the
+kinship matrix for each chromosome (\code{"chr"}).}
+
+\item{use_grid_only}{If \code{TRUE} and \code{probs} were calculated with
+\code{stepwidth="fixed"}, reduce them to the grid using
+\code{\link{probs_to_grid}}.}
+
+\item{omit_x}{If \code{TRUE}, only use the autosomes; ignored when
+\code{type="chr"}.}
+
+\item{use_allele_probs}{If \code{TRUE}, assess similarity with
+allele probabilities (that is, first run
+\code{\link{genoprob_to_alleleprob}}); otherwise use the genotype
+probabilities.}
+
+\item{normalize}{If \code{TRUE}, divide the kinship matrix by a
+normalizing constant (see Details).}
+
+\item{cores}{Number of CPU cores to use, for parallel calculations.
+(If \code{0}, use \code{\link[parallel]{detectCores}}.)
+Alternatively, this can be links to a set of cluster sockets, as
+produced by \code{\link[parallel]{makeCluster}}.}
 }
 \description{
 Calculate genetic similarity among individuals (kinship matrix)

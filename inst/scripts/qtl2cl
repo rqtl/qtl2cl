@@ -1,66 +1,144 @@
 #!/usr/bin/env Rscript --no-save --no-restore --no-init-file --no-site-file
-# required R packages:
-# optparse, qtl2scan, jsonlite, qtl2convert
-
+library(qtl2cl)
 library(optparse)
-
-# options
-# -g --genoprobs
-# -p --pheno
-# -a --addcovar
-# -k --kinship
-# -o --output
-# -c --cores
-# -m --ml
 
 # list of options to use
 option_list <- list(
-    make_option(c("-g", "--genoprobs"), action="store", default="genoprobs.rds",
-                help='file with genotype probabilities [default = "%default"]'),
-    make_option(c("-p", "--pheno"), action="store", default="pheno.rds",
-                help='file with phenotypes [default = "%default"]'),
-    make_option(c("-a", "--addcovar"), action="store", default=NULL,
-                help="file with additive covariates"),
-    make_option(c("-k", "--kinship"), action="store", default=NULL,
-                help="file with kinship matrix"),
-    make_option(c("-o", "--output"), action="store", default=NULL,
-                help="file to contain output [if missing, print to stdout]"),
-    make_option(c("-c", "--cores"), action="store", default=1,
-                help="number of compute cores to use"),
-    make_option(c("-m", "--ml"), action="store_true", default=FALSE,
-                help="Use maximum likelihood (otherwise REML)"))
+    make_option("--cross2rds", action="store_true", type="logical", default=FALSE,
+                help="Import cross data and save to RDS file. [Also give --input and --output]"),
+    make_option("--calc_genoprob", action="store_true", type="logical", default=FALSE,
+                help="Calculate genotype probabilities"),
+    make_option("--genoprob_to_alleleprob", action="store_true", type="logical", default=FALSE,
+                help="Convert genotype probabilities to allele dosages"),
+    make_option("--calc_kinship", action="store_true", type="logical", default=FALSE,
+                help="Calculate kinship matrix"),
+    make_option("--scan1", action="store_true", type="logical", default=FALSE,
+                help="Run a single-QTL genome scan"),
+    make_option(c("-i", "--input"), action="store", type="character",
+                help="Input file [not used with --scan1]"),
+    make_option(c("-o", "--output"), action="store", type="character",
+                help="Output file"),
+
+    # for calc_genoprob
+    make_option("--step", action="store", type="double", default=0,
+                help="For --calc_genoprob, distance between pseudomarkers"),
+    make_option("--off_end", action="store", type="double", default=0,
+                help="For --calc_genoprob, distance beyond terminal markers in which to insert pseudomarkers"),
+    make_option("--stepwidth", action="store", type="character", default="fixed",
+                help="For --calc_genoprob, indicates how to place pseudomarkers"),
+    make_option("--error_prob", action="store", type="double", default=1e-14,
+                help="For --calc_genoprob, assumed genotyping error probability"),
+    make_option("--map_function", action="store", type="character", default="haldane",
+                help="For --calc_genoprob, the genetic map function"),
+
+    # for calc_kinship
+    make_option("--type", action="store", type="character", default="overall",
+                help="For --calc_kinship, the type of kinship matrices (overall, loco, chr)"),
+    make_option("--use_grid_only", action="store", type="logical", default=TRUE,
+                help="For --calc_kinship, whether to first reduce genotype probs to a grid"),
+    make_option("--omit_x", action="store", type="logical", default=FALSE,
+                help="For --calc_kinship, if TRUE, use only autosomes"),
+    make_option("--use_allele_probs", action="store", type="logical", default=TRUE,
+                help="For --calc_kinship, if TRUE, first convert genotype probabilities to allele dosages"),
+    make_option("--normalize", action="store", type="logical", default=FALSE,
+                help="For --calc_kinship, if TRUE, divide the kinship matrix by a normalizing constant"),
+
+    # for scan1
+    make_option("--genoprobs", action="store", type="character", default="",
+                help="For --scan1, RDS file containing genotype probabilities"),
+    make_option("--pheno", action="store", type="character", default="",
+                help="For --scan1, file containing phenotypes"),
+    make_option("--kinship", action="store", type="character", default="",
+                help="For --scan1, optional file containing kinship matrix or matrices"),
+    make_option("--addcovar", action="store", type="character", default="",
+                help="For --scan1, optional file containing additive covariates"),
+    make_option("--Xcovar", action="store", type="character", default="",
+                help="For --scan1, optional file containing special X chromosome covariates"),
+    make_option("--intcovar", action="store", type="character", default="",
+                help="For --scan1, optional file containing interactive covariates"),
+    make_option("--weights", action="store", type="character", default="",
+                help="For --scan1, optional file containing weights"),
+    make_option("--reml", action="store", type="logical", default=TRUE,
+                help="For --scan1, whether to use REML (vs maximum likelihood)"),
+
+    # for all but --cross2rds
+    make_option("--cores", action="store", type="integer", default=1,
+                help="Number of CPU cores to use [not used with --cross2rds]")
+    )
 
 # parse the options
 opt <- parse_args(OptionParser(option_list=option_list))
 
-# read RDS file if provided; otherwise NULL
-read_if_provided <-
-    function(option=NULL)
-{
-    if(is.null(option))
-        return(NULL)
+# can have just one of the main options
+main_opts <- c("cross2rds", "calc_genoprob", "genoprob_to_alleleprob",
+               "calc_kinship", "scan1")
 
-    readRDS(option)
+if(sum(unlist(opt[main_opts])) != 1) {
+    stop("Provide exactly one of these options:\n",
+         paste(paste0("  --", main_opts), collapse="\n"))
 }
 
-library(qtl2scan)
 
-gp <- readRDS(opt$genoprobs)
-y <- readRDS(opt$pheno)
-a <- read_if_provided(opt$addcovar)
-k <- read_if_provided(opt$kinship)
-opt$reml <- !opt$ml
+if(opt$cross2rds) {
 
-result <- scan1(gp, y, kinship=k, addcovar=a, cores=opt$cores, reml=opt$reml)
+    if(is.null(opt$input) || opt$input == "")
+        stop("Provide input file name (zip file, or control file as JSON or YAML)")
+    if(is.null(opt$output) || opt$output == "")
+        stop("Provide output file name (RDS file)")
 
-if(is.null(opt$output)) {
-    # scan1 to table, in JSON
-    library(qtl2convert)
-    library(jsonlite)
-    result <- cbind(map_list_to_df(result$map),
-                    result$lod)
-    rownames(result) <- NULL
-    toJSON(result)
+    qtl2cl::cross2rds(opt$input, opt$output)
+
+} else if(opt$calc_genoprob) {
+
+    if(is.null(opt$input) || opt$input == "")
+        stop("Provide input file name (cross object as RDS file)")
+    if(is.null(opt$output) || opt$output == "")
+        stop("Provide output file name (RDS file)")
+
+    qtl2cl::run_calcgenoprob(opt$input, opt$output, step=opt$step, off_end=opt$off_end,
+                             stepwidth=opt$stepwidth, error_prob=opt$error_prob,
+                             map_function=opt$map_function, cores=opt$cores)
+
+} else if(opt$genoprob_to_alleleprob) {
+
+    if(is.null(opt$input) || opt$input == "")
+        stop("Provide input file name (genotype probabilities as RDS file)")
+    if(is.null(opt$output) || opt$output == "")
+        stop("Provide output file name (RDS file)")
+
+    qtl2cl::run_gp2ap(opt$input, opt$output, cores=opt$cores)
+
+} else if(opt$calc_kinship) {
+
+    if(is.null(opt$input) || opt$input == "")
+        stop("Provide input file name (genotype probabilities as RDS file)")
+    if(is.null(opt$output) || opt$output == "")
+        stop("Provide output file name (RDS file)")
+
+    qtl2cl::run_calckinship(opt$input, opt$output, type=opt$type,
+                            use_grid_only=opt$use_grid_only, omit_x=opt$omit_x,
+                            use_allele_probs=opt$use_allele_probs, normalize=opt$normalize,
+                            cores=opt$cores)
+
+} else if(opt$scan1) {
+
+    if(is.null(opt$genoprobs) || opt$genoprobs == "")
+        stop("Provide name of RDS file with genotype probabilities, via --genoprobs")
+    if(is.null(opt$pheno) || opt$pheno == "")
+        stop("Provide name of file with phenotype data, via --pheno")
+
+    if(is.null(opt$output) || opt$output == "")
+        opt$output <- NULL
+
+    run_scan1(genoprobs_file=opt$genoprobs, pheno_file=opt$pheno,
+              output_file=opt$output, kinship_file=opt$kinship,
+              addcovar_file=opt$addcovar, Xcovar_file=opt$Xcovar,
+              intcovar_file=opt$intcovar, weights_file=opt$weights,
+              reml=opt$reml, cores=opt$cores)
+
 } else {
-    saveRDS(result, file=opt$output)
+
+    stop("Provide exactly one of these options:\n",
+         paste(paste0("  --", main_opts), collapse="\n"))
+
 }
