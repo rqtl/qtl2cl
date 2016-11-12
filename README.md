@@ -25,7 +25,7 @@ CRAN, and then the present [qtl2cl](https://github.com/rqtl/qtl2cl)
 package.
 
     install.packages("optparse")
-    devtools::install_github("qtl2cl")
+    devtools::install_github("rqtl/qtl2cl")
 
 The command-line script will be located at
 `$R_LIBS/qtl2cl/scripts/qtl2cl` where `$R_LIBS` is the path to the R
