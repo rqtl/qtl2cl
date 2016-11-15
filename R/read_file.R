@@ -22,6 +22,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom yaml yaml.load_file
 #' @importFrom qtl2geno read_csv
+#' @importFrom optparse make_option
 #' @export
 #'
 #' @examples
