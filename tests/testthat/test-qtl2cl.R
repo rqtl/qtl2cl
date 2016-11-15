@@ -1,6 +1,6 @@
 context("command-line interface")
 
-qtl2cl <- "../../inst/scripts/qtl2cl"
+qtl2cl <- system.file("scripts", "qtl2cl", package="qtl2cl")
 
 test_that("qtl2cl --cross2rds works", {
 
@@ -9,7 +9,10 @@ test_that("qtl2cl --cross2rds works", {
 
     system(paste(qtl2cl, "--cross2rds -i",  zfile, "-o", ofile))
 
-    expect_equal(qtl2geno::read_cross2(zfile), readRDS(ofile))
+    cross <- qtl2geno::read_cross2(zfile)
+    out <- readRDS(ofile)
+
+    expect_equal(cross, out)
 
     unlink(ofile)
 
@@ -32,8 +35,9 @@ test_that("qtl2cl --calc_genoprob works", {
     system(paste(qtl2cl, "--calc_genoprob --step=0.5 --map_function=c-f --error_prob=0.002 -i", cross_file, "-o", probs_file))
 
     pr <- calc_genoprob(cross, step=0.5, map_function="c-f", error_prob=0.002)
+    pr2 <- readRDS(probs_file)
 
-    expect_equal(pr, readRDS(probs_file))
+    expect_equal(pr, pr2)
 
     unlink(cross_file)
     unlink(probs_file)
