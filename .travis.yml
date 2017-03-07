@@ -1,9 +1,9 @@
 language: r
 
 r_github_packages:
- - rqtl/qtl2geno
- - rqtl/qtl2scan
- - rqtl/qtl2convert
+ - kbroman/qtl2geno@refactor
+ - kbroman/qtl2scan@refactor
+ - kbroman/qtl2convert@refactor
 
 warnings_are_errors: true
 
