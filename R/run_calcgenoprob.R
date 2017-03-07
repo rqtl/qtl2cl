@@ -22,7 +22,7 @@
 #' Alternatively, this can be links to a set of cluster sockets, as
 #' produced by \code{\link[parallel]{makeCluster}}.
 #'
-#' @importFrom qtl2geno calc_genoprob
+#' @importFrom qtl2geno calc_genoprob insert_pseudomarkers
 #' @export
 #'
 #' @examples
