@@ -4,14 +4,17 @@
 \alias{run_calcgenoprob}
 \title{Run calc_genoprob and save result to rds}
 \usage{
-run_calcgenoprob(cross_file, output_file, step = 0, off_end = 0,
-  stepwidth = c("fixed", "max"), error_prob = 0.0001,
+run_calcgenoprob(cross_file, output_file, map_file = NULL, step = 0,
+  off_end = 0, stepwidth = c("fixed", "max"), error_prob = 0.0001,
   map_function = c("haldane", "kosambi", "c-f", "morgan"), cores = 1)
 }
 \arguments{
 \item{cross_file}{Character string with path to RDS file containing cross}
 
 \item{output_file}{Character string with path to RDS file for output}
+
+\item{map_file}{Character string with path to RDS file for writing genetic map
+(with inserted pseudomarkers)}
 
 \item{step}{Distance between pseudomarkers and markers; if
 \code{step=0} no pseudomarkers are inserted.}
@@ -41,5 +44,5 @@ Run calc_genoprob and save result to rds
 input_file <- paste0("https://github.com/rqtl/qtl2data/",
                      "blob/master/B6BTBR/b6btbr.zip")
 \dontrun{cross2rds(input_file, "b6btbr.rds")}
-\dontrun{run_calcgenoprob("b6btbr.rds", "b6btbr_probs.rds")}
+\dontrun{run_calcgenoprob("b6btbr.rds", "b6btbr_probs.rds", "b6btbr_gmap.rds")}
 }

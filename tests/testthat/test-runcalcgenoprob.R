@@ -11,7 +11,8 @@ test_that("run_calcgenoprob works", {
     run_calcgenoprob(cross_rdsfile, outfile, step=1, error_prob=0.002, map_function="c-f")
 
     cross <- readRDS(cross_rdsfile)
-    pr <- calc_genoprob(cross, step=1, error_prob=0.002, map_function="c-f")
+    map <- insert_pseudomarkers(cross$gmap, step=1)
+    pr <- calc_genoprob(cross, map, error_prob=0.002, map_function="c-f")
 
     expect_equal(readRDS(outfile), pr)
 

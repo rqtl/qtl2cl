@@ -32,6 +32,8 @@ option_list <- list(
                 help="For --calc_genoprob, assumed genotyping error probability"),
     make_option("--map_function", action="store", type="character", default="haldane",
                 help="For --calc_genoprob, the genetic map function"),
+    make_option("--map_file", action="store", type="character", default=NULL,
+                help="For --calc_genoprob, output file for genetic map, as RDS"),
 
     # for calc_kinship
     make_option("--type", action="store", type="character", default="overall",
@@ -111,7 +113,8 @@ if(opt$cross2rds) {
     if(is.null(opt$output) || opt$output == "")
         stop("Provide output file name (RDS file)")
 
-    qtl2cl::run_calcgenoprob(opt$input, opt$output, step=opt$step, off_end=opt$off_end,
+    qtl2cl::run_calcgenoprob(opt$input, opt$output, map_file=opt$map_file,
+                             step=opt$step, off_end=opt$off_end,
                              stepwidth=opt$stepwidth, error_prob=opt$error_prob,
                              map_function=opt$map_function, cores=opt$cores)
 
