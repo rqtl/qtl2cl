@@ -11,8 +11,8 @@ test_that("run_calcgenoprob works", {
     run_calcgenoprob(cross_rdsfile, outfile, step=1, error_prob=0.002, map_function="c-f")
 
     cross <- readRDS(cross_rdsfile)
-    map <- insert_pseudomarkers(cross$gmap, step=1)
-    pr <- calc_genoprob(cross, map, error_prob=0.002, map_function="c-f")
+    map <- qtl2geno::insert_pseudomarkers(cross$gmap, step=1)
+    pr <- qtl2geno::calc_genoprob(cross, map, error_prob=0.002, map_function="c-f")
 
     expect_equal(readRDS(outfile), pr)
 

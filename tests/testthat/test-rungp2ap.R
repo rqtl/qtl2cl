@@ -12,7 +12,7 @@ test_that("run_gp2ap works", {
     run_gp2ap(prob_file, aprob_file)
 
     pr <- readRDS(prob_file)
-    apr <- genoprob_to_alleleprob(pr)
+    apr <- qtl2geno::genoprob_to_alleleprob(pr)
 
     expect_equal(readRDS(aprob_file), apr)
 
