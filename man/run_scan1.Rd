@@ -4,7 +4,7 @@
 \alias{run_scan1}
 \title{Run scan1}
 \usage{
-run_scan1(genoprobs_file, pheno_file, output_file = NULL,
+run_scan1(genoprobs_file, pheno_file, output_file = NULL, map_file = NULL,
   kinship_file = NULL, addcovar_file = NULL, Xcovar_file = NULL,
   intcovar_file = NULL, weights_file = NULL, reml = TRUE, cores = 1)
 }
@@ -14,6 +14,8 @@ run_scan1(genoprobs_file, pheno_file, output_file = NULL,
 \item{pheno_file}{Name of file with phenotypes}
 
 \item{output_file}{Optional output RDS file. If NULL, print output as a table.}
+
+\item{map_file}{Optional (RDS) file containing map. Needed if \code{output_file} is NULL.}
 
 \item{kinship_file}{Optional file containing kinship matrix}
 

@@ -5,6 +5,7 @@
 #' @param genoprobs_file Name of file with genotype probabilities
 #' @param pheno_file Name of file with phenotypes
 #' @param output_file Optional output RDS file. If NULL, print output as a table.
+#' @param map_file Optional (RDS) file containing map. Needed if \code{output_file} is NULL.
 #' @param kinship_file Optional file containing kinship matrix
 #' @param addcovar_file Optional file containing additive covariates
 #' @param Xcovar_file Optional file containing X chromosome covariates
@@ -20,6 +21,7 @@ run_scan1 <-
     function(genoprobs_file,
              pheno_file,
              output_file=NULL,
+             map_file=NULL,
              kinship_file=NULL,
              addcovar_file=NULL,
              Xcovar_file=NULL,
@@ -46,7 +48,10 @@ run_scan1 <-
                               reml=reml, cores=cores)
 
     if(is.null(output_file)) {
-        tab <- qtl2convert::scan_qtl2_to_qtl(result)
+        if(!is.null(map_file)) map <- readRDS(map_file)
+        else stop("Need map_file")
+
+        tab <- qtl2convert::scan_qtl2_to_qtl(result, map)
         tab <- cbind(marker=rownames(tab),
                      as.data.frame(tab))
         rownames(tab) <- NULL

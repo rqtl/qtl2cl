@@ -33,7 +33,7 @@ option_list <- list(
     make_option("--map_function", action="store", type="character", default="haldane",
                 help="For --calc_genoprob, the genetic map function"),
     make_option("--map_file", action="store", type="character", default=NULL,
-                help="For --calc_genoprob, output file for genetic map, as RDS"),
+                help="RDS file for genetic map (optional output with --calc_genoprob and input with --scan1)"),
 
     # for calc_kinship
     make_option("--type", action="store", type="character", default="overall",
@@ -147,7 +147,8 @@ if(opt$cross2rds) {
         opt$output <- NULL
 
     run_scan1(genoprobs_file=opt$genoprobs, pheno_file=opt$pheno,
-              output_file=opt$output, kinship_file=opt$kinship,
+              output_file=opt$output, map_file=opt$map_file,
+              kinship_file=opt$kinship,
               addcovar_file=opt$addcovar, Xcovar_file=opt$Xcovar,
               intcovar_file=opt$intcovar, weights_file=opt$weights,
               reml=opt$reml, cores=opt$cores)
