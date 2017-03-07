@@ -23,4 +23,3 @@ input_file <- paste0("https://github.com/rqtl/qtl2data/",
                      "blob/master/B6BTBR/b6btbr.zip")
 \dontrun{cross2rds(input_file, "b6btbr.rds")}
 }
-

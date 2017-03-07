@@ -32,4 +32,3 @@ run_scan1(genoprobs_file, pheno_file, output_file = NULL,
 \description{
 Read in a bunch of data and then run \code{\link[qtl2scan]{scan1}}.
 }
-

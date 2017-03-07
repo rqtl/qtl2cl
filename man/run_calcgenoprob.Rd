@@ -43,4 +43,3 @@ input_file <- paste0("https://github.com/rqtl/qtl2data/",
 \dontrun{cross2rds(input_file, "b6btbr.rds")}
 \dontrun{run_calcgenoprob("b6btbr.rds", "b6btbr_probs.rds")}
 }
-

@@ -49,4 +49,3 @@ input_file <- paste0("https://github.com/rqtl/qtl2data/",
 \dontrun{run_calcgenoprob("b6btbr.rds", "b6btbr_probs.rds")}
 \dontrun{run_calckinship("b6btbr_probs.rds", "b6btbr_kinship.rds")}
 }
-
