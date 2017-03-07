@@ -38,8 +38,6 @@ option_list <- list(
     # for calc_kinship
     make_option("--type", action="store", type="character", default="overall",
                 help="For --calc_kinship, the type of kinship matrices (overall, loco, chr)"),
-    make_option("--use_grid_only", action="store", type="logical", default=TRUE,
-                help="For --calc_kinship, whether to first reduce genotype probs to a grid"),
     make_option("--omit_x", action="store", type="logical", default=FALSE,
                 help="For --calc_kinship, if TRUE, use only autosomes"),
     make_option("--use_allele_probs", action="store", type="logical", default=TRUE,
@@ -135,9 +133,8 @@ if(opt$cross2rds) {
         stop("Provide output file name (RDS file)")
 
     qtl2cl::run_calckinship(opt$input, opt$output, type=opt$type,
-                            use_grid_only=opt$use_grid_only, omit_x=opt$omit_x,
-                            use_allele_probs=opt$use_allele_probs, normalize=opt$normalize,
-                            cores=opt$cores)
+                            omit_x=opt$omit_x, use_allele_probs=opt$use_allele_probs,
+                            normalize=opt$normalize, cores=opt$cores)
 
 } else if(opt$scan1) {
 
