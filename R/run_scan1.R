@@ -48,7 +48,7 @@ run_scan1 <-
                               reml=reml, cores=cores)
 
     if(is.null(output_file)) {
-        if(!is.null(map_file)) map <- readRDS(map_file)
+        if(!is.null(map_file) && map_file != "") map <- readRDS(map_file)
         else stop("Need map_file")
 
         tab <- qtl2convert::scan_qtl2_to_qtl(result, map)

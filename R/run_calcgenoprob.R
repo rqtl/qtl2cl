@@ -41,7 +41,7 @@ run_calcgenoprob <-
     cross <- readRDS(cross_file)
     map <- qtl2geno::insert_pseudomarkers(cross$gmap, step=step, off_end=off_end, stepwidth=stepwidth)
 
-    if(!is.null(map_file))
+    if(!is.null(map_file) && map_file != "")
         saveRDS( map, file=map_file )
 
     saveRDS( qtl2geno::calc_genoprob(cross=cross, map=map,

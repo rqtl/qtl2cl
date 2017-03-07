@@ -32,7 +32,7 @@ option_list <- list(
                 help="For --calc_genoprob, assumed genotyping error probability"),
     make_option("--map_function", action="store", type="character", default="haldane",
                 help="For --calc_genoprob, the genetic map function"),
-    make_option("--map_file", action="store", type="character", default=NULL,
+    make_option("--map_file", action="store", type="character", default="",
                 help="RDS file for genetic map (optional output with --calc_genoprob and input with --scan1)"),
 
     # for calc_kinship
