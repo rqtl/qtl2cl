@@ -70,9 +70,12 @@ providing the `--map_file` argument.
 
 Here's an example using the
 [B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
-data.
+data.  We've split
+the command across two lines so that it's easier to read.
 
-    qtl2cl --calc_genoprob --input=b6btbr.rds --output=b6btbr_probs.rds --map_file=b6btbr_map.rds --step=0.5 --stepwidth=max --error_prob=0.002 --map_function=c-f
+
+    qtl2cl --calc_genoprob --input=b6btbr.rds --output=b6btbr_probs.rds --map_file=b6btbr_map.rds \
+       --step=0.5 --stepwidth=max --error_prob=0.002 --map_function=c-f
 
 #### Convert genotype probabilities to allele dosages
 
@@ -147,8 +150,19 @@ covariates derived above (with `qtl2cl --get_x_covar`). We've split
 the command across two lines, because the URL for phenotypes is so
 long.
 
+In this case, the genome scan results will be saved to an RDS file, `b6btbr_scan.rds`.
+
     qtl2cl --scan1 --genoprobs=b6btbr_aprobs.rds --Xcovar=b6btbr_xcovar.rds --output=b6btbr_scan.rds \
-        --map_file=b6btbr_map.rds --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv
+        --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv
+
+Alternatively, if `--output` is not provided, the results are printed
+to STDOUT as a JSON object. In this case, it's best to provide
+`--map_file` (as used, to save the map object, when running
+`--calc_genoprob`), so that the JSON output includes chromosome and
+position information.
+
+    qtl2cl --scan1 --genoprobs=b6btbr_aprobs.rds --Xcovar=b6btbr_xcovar.rds --map_file=b6btbr_map.rds \
+        --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv
 
 
 ---
