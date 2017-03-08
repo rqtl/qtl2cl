@@ -48,10 +48,16 @@ run_scan1 <-
                               reml=reml, cores=cores)
 
     if(is.null(output_file)) {
-        if(!is.null(map_file) && map_file != "") map <- readRDS(map_file)
-        else stop("Need map_file")
+        if(!is.null(map_file) && map_file != "") {
+            map <- readRDS(map_file)
 
-        tab <- qtl2convert::scan_qtl2_to_qtl(result, map)
+            tab <- qtl2convert::scan_qtl2_to_qtl(result, map)
+        }
+        else { # no map file so don't include chr,pos columns
+            tab <- as.matrix(result)
+        }
+
+        # add marker name column and remove row names
         tab <- cbind(marker=rownames(tab),
                      as.data.frame(tab))
         rownames(tab) <- NULL

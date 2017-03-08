@@ -64,11 +64,15 @@ calculations is through the following arguments:
 - `--map_function`
 - `--cores`
 
+It may also be important to *write* the genetic marker map, with
+pseudomarkers inserted, to an RDS file. This is accomplished by
+providing the `--map_file` argument.
+
 Here's an example using the
 [B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
 data.
 
-    qtl2cl --calc_genoprob --input=b6btbr.rds --output=b6btbr_probs.rds --step=0.5 --stepwidth=max --error_prob=0.002 --map_function=c-f
+    qtl2cl --calc_genoprob --input=b6btbr.rds --output=b6btbr_probs.rds --map_file=b6btbr_map.rds --step=0.5 --stepwidth=max --error_prob=0.002 --map_function=c-f
 
 #### Convert genotype probabilities to allele dosages
 
@@ -129,9 +133,12 @@ must be in an RDS file). In each case, the contents should be a
 rectangle of numeric values with a header row and with the first
 column being a set of individual identifiers.
 
-If an output file is provided, the results are saved as an RDS
-file. If no output file is provided, the results are printed to STDOUT
-as JSON.
+If an output file is provided, the results are saved as an RDS file.
+If no output file is provided, the results are printed to STDOUT as
+JSON. In the latter case, one would generally want to provide the
+genetic marker/pseudomarker map as an RDS file (via `--map_file`),
+created when running `--calc_genoprob`. Otherwise the LOD scores will
+be provided but without information about chromosomes and positions.
 
 Here's an example using the
 [B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
@@ -141,7 +148,7 @@ the command across two lines, because the URL for phenotypes is so
 long.
 
     qtl2cl --scan1 --genoprobs=b6btbr_aprobs.rds --Xcovar=b6btbr_xcovar.rds --output=b6btbr_scan.rds \
-        --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv
+        --map_file=b6btbr_map.rds --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv
 
 
 ---
