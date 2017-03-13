@@ -1,4 +1,6 @@
 language: r
+sudo: false
+cache: packages
 
 r_github_packages:
  - rqtl/qtl2geno
@@ -6,8 +8,6 @@ r_github_packages:
  - rqtl/qtl2convert
 
 warnings_are_errors: true
-
-sudo: required
 
 notifications:
   email:
