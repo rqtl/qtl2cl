@@ -5,8 +5,7 @@
 \title{Calculate kinship matrix}
 \usage{
 run_calckinship(input_file, output_file, type = c("overall", "loco", "chr"),
-  use_grid_only = TRUE, omit_x = FALSE, use_allele_probs = TRUE,
-  normalize = FALSE, cores = 1)
+  omit_x = FALSE, use_allele_probs = TRUE, normalize = FALSE, cores = 1)
 }
 \arguments{
 \item{input_file}{Input RDS file containing genotype or allele probabilities}
@@ -17,10 +16,6 @@ run_calckinship(input_file, output_file, type = c("overall", "loco", "chr"),
 (\code{"overall"}, using all chromosomes), the kinship matrix
 leaving out one chromosome at a time (\code{"loco"}), or the
 kinship matrix for each chromosome (\code{"chr"}).}
-
-\item{use_grid_only}{If \code{TRUE} and \code{probs} were calculated with
-\code{stepwidth="fixed"}, reduce them to the grid using
-\code{\link{probs_to_grid}}.}
 
 \item{omit_x}{If \code{TRUE}, only use the autosomes; ignored when
 \code{type="chr"}.}
@@ -49,4 +44,3 @@ input_file <- paste0("https://github.com/rqtl/qtl2data/",
 \dontrun{run_calcgenoprob("b6btbr.rds", "b6btbr_probs.rds")}
 \dontrun{run_calckinship("b6btbr_probs.rds", "b6btbr_kinship.rds")}
 }
-

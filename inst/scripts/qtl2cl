@@ -32,12 +32,12 @@ option_list <- list(
                 help="For --calc_genoprob, assumed genotyping error probability"),
     make_option("--map_function", action="store", type="character", default="haldane",
                 help="For --calc_genoprob, the genetic map function"),
+    make_option("--map_file", action="store", type="character", default="",
+                help="RDS file for genetic map (optional output with --calc_genoprob and input with --scan1)"),
 
     # for calc_kinship
     make_option("--type", action="store", type="character", default="overall",
                 help="For --calc_kinship, the type of kinship matrices (overall, loco, chr)"),
-    make_option("--use_grid_only", action="store", type="logical", default=TRUE,
-                help="For --calc_kinship, whether to first reduce genotype probs to a grid"),
     make_option("--omit_x", action="store", type="logical", default=FALSE,
                 help="For --calc_kinship, if TRUE, use only autosomes"),
     make_option("--use_allele_probs", action="store", type="logical", default=TRUE,
@@ -111,7 +111,8 @@ if(opt$cross2rds) {
     if(is.null(opt$output) || opt$output == "")
         stop("Provide output file name (RDS file)")
 
-    qtl2cl::run_calcgenoprob(opt$input, opt$output, step=opt$step, off_end=opt$off_end,
+    qtl2cl::run_calcgenoprob(opt$input, opt$output, map_file=opt$map_file,
+                             step=opt$step, off_end=opt$off_end,
                              stepwidth=opt$stepwidth, error_prob=opt$error_prob,
                              map_function=opt$map_function, cores=opt$cores)
 
@@ -132,9 +133,8 @@ if(opt$cross2rds) {
         stop("Provide output file name (RDS file)")
 
     qtl2cl::run_calckinship(opt$input, opt$output, type=opt$type,
-                            use_grid_only=opt$use_grid_only, omit_x=opt$omit_x,
-                            use_allele_probs=opt$use_allele_probs, normalize=opt$normalize,
-                            cores=opt$cores)
+                            omit_x=opt$omit_x, use_allele_probs=opt$use_allele_probs,
+                            normalize=opt$normalize, cores=opt$cores)
 
 } else if(opt$scan1) {
 
@@ -147,7 +147,8 @@ if(opt$cross2rds) {
         opt$output <- NULL
 
     run_scan1(genoprobs_file=opt$genoprobs, pheno_file=opt$pheno,
-              output_file=opt$output, kinship_file=opt$kinship,
+              output_file=opt$output, map_file=opt$map_file,
+              kinship_file=opt$kinship,
               addcovar_file=opt$addcovar, Xcovar_file=opt$Xcovar,
               intcovar_file=opt$intcovar, weights_file=opt$weights,
               reml=opt$reml, cores=opt$cores)

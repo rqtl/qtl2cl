@@ -7,7 +7,8 @@ file <- paste0("https://raw.githubusercontent.com/rqtl/",
 b6btbr <- read_cross2(file)
 
 # calculate genotype probabilities
-pr <- calc_genoprob(b6btbr, step=1, err=0.002, map_function="c-f", cores=0)
+map <- insert_pseudomarkers(b6btbr$gmap, step=1)
+pr <- calc_genoprob(b6btbr, map, err=0.002, map_function="c-f", cores=0)
 
 # save stuff to file
 saveRDS(pr, file="genoprobs.rds")
