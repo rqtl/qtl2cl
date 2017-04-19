@@ -1,4 +1,4 @@
-## qtl2cl 0.5-2
+## qtl2cl 0.5-2 (2017-03-07)
 
 ### New features
 

@@ -169,4 +169,4 @@ position information.
 
 ### License
 
-[Licensed](License.md) under [GPL-3](http://www.r-project.org/Licenses/GPL-3).
+[Licensed](License.md) under [GPL-3](https://www.r-project.org/Licenses/GPL-3).
