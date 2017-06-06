@@ -2,6 +2,9 @@
 
 ### Minor changes
 
+- Remove `normalize` option for `calc_kinship` because no longer
+  present in [qtl2geno](https://github.com/rqtl/qtl2geno).
+
 - Revised installation instructions.
 
 

@@ -15,8 +15,6 @@
 #' allele probabilities (that is, first run
 #' \code{\link{genoprob_to_alleleprob}}); otherwise use the genotype
 #' probabilities.
-#' @param normalize If \code{TRUE}, divide the kinship matrix by a
-#' normalizing constant (see Details).
 #' @param cores Number of CPU cores to use, for parallel calculations.
 #' (If \code{0}, use \code{\link[parallel]{detectCores}}.)
 #' Alternatively, this can be links to a set of cluster sockets, as
@@ -34,12 +32,12 @@
 run_calckinship <-
     function(input_file, output_file, type=c("overall", "loco", "chr"),
              omit_x=FALSE,
-             use_allele_probs=TRUE, normalize=FALSE, cores=1)
+             use_allele_probs=TRUE, cores=1)
 {
     type <- match.arg(type)
 
     saveRDS( qtl2geno::calc_kinship( readRDS(input_file), type=type,
                                     omit_x=omit_x, use_allele_probs=use_allele_probs,
-                                    normalize=normalize, quiet=TRUE, cores=cores),
+                                    quiet=TRUE, cores=cores),
             file=output_file)
 }

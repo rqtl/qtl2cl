@@ -5,7 +5,7 @@
 \title{Calculate kinship matrix}
 \usage{
 run_calckinship(input_file, output_file, type = c("overall", "loco", "chr"),
-  omit_x = FALSE, use_allele_probs = TRUE, normalize = FALSE, cores = 1)
+  omit_x = FALSE, use_allele_probs = TRUE, cores = 1)
 }
 \arguments{
 \item{input_file}{Input RDS file containing genotype or allele probabilities}
@@ -24,9 +24,6 @@ kinship matrix for each chromosome (\code{"chr"}).}
 allele probabilities (that is, first run
 \code{\link{genoprob_to_alleleprob}}); otherwise use the genotype
 probabilities.}
-
-\item{normalize}{If \code{TRUE}, divide the kinship matrix by a
-normalizing constant (see Details).}
 
 \item{cores}{Number of CPU cores to use, for parallel calculations.
 (If \code{0}, use \code{\link[parallel]{detectCores}}.)

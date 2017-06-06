@@ -98,7 +98,6 @@ arguments:
 - `--use_grid_only`
 - `--omit_x`
 - `--use_allele_probs`
-- `--normalize`
 
 Here's an example using the
 [B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
