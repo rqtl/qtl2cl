@@ -1,3 +1,10 @@
+## qtl2cl 0.5-3 (2017-06-05)
+
+### Minor changes
+
+- Revised installation instructions.
+
+
 ## qtl2cl 0.5-2 (2017-03-07)
 
 ### New features

@@ -15,17 +15,13 @@ a command-line interface to a restricted set of
 You first need to install R/qtl2 using the following. (For more
 detail, see the instructions at <http://kbroman.org/qtl2/>.)
 
-    install.packages(c("devtools", "yaml", "jsonlite", "data.table", "RcppEigen"))
-    library(devtools)
-    install_github(paste0("rqtl/qtl2", c("geno", "scan", "plot", "convert")))
+    install.packages("qtl2", repos="http://rqtl.org/qtl2cran")
 
-You also need to install the
-[optparse](https://CRAN.R-project.org/package=optparse) package from
-CRAN, and then the present [qtl2cl](https://github.com/rqtl/qtl2cl)
-package.
+You then need to install the [qtl2cl](https://github.com/rqtl/qtl2cl)
+package. The [optparse](https://CRAN.R-project.org/package=optparse) package
+will also be installed.
 
-    install.packages("optparse")
-    devtools::install_github("rqtl/qtl2cl")
+    install.packages("qtl2cl", repos="http://rqtl.org/qtl2cran")
 
 The command-line script will be located at
 `$R_LIBS/qtl2cl/scripts/qtl2cl` where `$R_LIBS` is the path to the R
