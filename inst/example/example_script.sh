@@ -1,3 +1,5 @@
+# need to add scripts directory in the installed package to PATH
+#    use system.file("scripts", package="qtl2cl") to find the directory
 export PATH=$PATH:~/Rlibs/qtl2cl/scripts/
 
 qtl2cl --cross2rds -i ~/Rlibs/qtl2geno/extdata/iron.zip -o iron.rds
