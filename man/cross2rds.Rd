@@ -4,7 +4,7 @@
 \alias{cross2rds}
 \title{Read cross and save as rds}
 \usage{
-cross2rds(input_file, output_file)
+cross2rds(input_file, output_file, compress = FALSE)
 }
 \arguments{
 \item{input_file}{Character string with path to the
@@ -14,6 +14,8 @@ data files, in which case the contents are unzipped to a temporary
 directory and then read.}
 
 \item{output_file}{Character string with path to RDS file for output}
+
+\item{compress}{If TRUE, save a compressed RDS file (smaller but slower).}
 }
 \description{
 Read cross files and save as rds

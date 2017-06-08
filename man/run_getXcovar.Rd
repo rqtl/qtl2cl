@@ -4,12 +4,14 @@
 \alias{run_getXcovar}
 \title{Get X covariates and write to file}
 \usage{
-run_getXcovar(input_file, output_file)
+run_getXcovar(input_file, output_file, compress = FALSE)
 }
 \arguments{
 \item{input_file}{Input RDS file for cross}
 
 \item{output_file}{Output RDS file for X chromosome covariates}
+
+\item{compress}{If TRUE, save a compressed RDS file (smaller but slower).}
 }
 \description{
 Read cross from RDS file, determine X chromosome covariates, and write to another RDS file.

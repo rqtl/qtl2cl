@@ -5,7 +5,7 @@
 \title{Calculate kinship matrix}
 \usage{
 run_calckinship(input_file, output_file, type = c("overall", "loco", "chr"),
-  omit_x = FALSE, use_allele_probs = TRUE, cores = 1)
+  omit_x = FALSE, use_allele_probs = TRUE, cores = 1, compress = FALSE)
 }
 \arguments{
 \item{input_file}{Input RDS file containing genotype or allele probabilities}
@@ -29,6 +29,8 @@ probabilities.}
 (If \code{0}, use \code{\link[parallel]{detectCores}}.)
 Alternatively, this can be links to a set of cluster sockets, as
 produced by \code{\link[parallel]{makeCluster}}.}
+
+\item{compress}{If TRUE, save a compressed RDS file (smaller but slower).}
 }
 \description{
 Calculate genetic similarity among individuals (kinship matrix)

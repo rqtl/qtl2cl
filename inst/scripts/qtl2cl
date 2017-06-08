@@ -20,6 +20,8 @@ option_list <- list(
                 help="Input file [not used with --scan1]"),
     make_option(c("-o", "--output"), action="store", type="character",
                 help="Output file"),
+    make_option("--compress", action="store_true", type="logical", default=FALSE,
+                  help="Save compressed RDS files"),
 
     # for calc_genoprob
     make_option("--step", action="store", type="double", default=0,
@@ -42,8 +44,6 @@ option_list <- list(
                 help="For --calc_kinship, if TRUE, use only autosomes"),
     make_option("--use_allele_probs", action="store", type="logical", default=TRUE,
                 help="For --calc_kinship, if TRUE, first convert genotype probabilities to allele dosages"),
-    make_option("--normalize", action="store", type="logical", default=FALSE,
-                help="For --calc_kinship, if TRUE, divide the kinship matrix by a normalizing constant"),
 
     # for scan1
     make_option("--genoprobs", action="store", type="character", default="",
@@ -93,7 +93,7 @@ if(opt$cross2rds) {
     if(is.null(opt$output) || opt$output == "")
         stop("Provide output file name (RDS file)")
 
-    qtl2cl::cross2rds(opt$input, opt$output)
+    qtl2cl::cross2rds(opt$input, opt$output, compress=opt$compress)
 
 } else if(opt$get_x_covar) {
 
@@ -102,7 +102,7 @@ if(opt$cross2rds) {
     if(is.null(opt$output) || opt$output == "")
         stop("Provide output file name (RDS file)")
 
-    qtl2cl::run_getXcovar(opt$input, opt$output)
+    qtl2cl::run_getXcovar(opt$input, opt$output, compress=opt$compress)
 
 } else if(opt$calc_genoprob) {
 
@@ -114,7 +114,8 @@ if(opt$cross2rds) {
     qtl2cl::run_calcgenoprob(opt$input, opt$output, map_file=opt$map_file,
                              step=opt$step, off_end=opt$off_end,
                              stepwidth=opt$stepwidth, error_prob=opt$error_prob,
-                             map_function=opt$map_function, cores=opt$cores)
+                             map_function=opt$map_function, cores=opt$cores,
+                             compress=opt$compress)
 
 } else if(opt$genoprob_to_alleleprob) {
 
@@ -123,7 +124,7 @@ if(opt$cross2rds) {
     if(is.null(opt$output) || opt$output == "")
         stop("Provide output file name (RDS file)")
 
-    qtl2cl::run_gp2ap(opt$input, opt$output, cores=opt$cores)
+    qtl2cl::run_gp2ap(opt$input, opt$output, cores=opt$cores, compress=opt$compress)
 
 } else if(opt$calc_kinship) {
 
@@ -134,7 +135,7 @@ if(opt$cross2rds) {
 
     qtl2cl::run_calckinship(opt$input, opt$output, type=opt$type,
                             omit_x=opt$omit_x, use_allele_probs=opt$use_allele_probs,
-                            normalize=opt$normalize, cores=opt$cores)
+                            cores=opt$cores, compress=opt$compress)
 
 } else if(opt$scan1) {
 
@@ -151,6 +152,6 @@ if(opt$cross2rds) {
               kinship_file=opt$kinship,
               addcovar_file=opt$addcovar, Xcovar_file=opt$Xcovar,
               intcovar_file=opt$intcovar, weights_file=opt$weights,
-              reml=opt$reml, cores=opt$cores)
+              reml=opt$reml, cores=opt$cores, compress=opt$compress)
 
 }
