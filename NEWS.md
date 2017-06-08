@@ -1,3 +1,12 @@
+## qtl2cl 0.5-4 (2017-06-07)
+
+### New features
+
+- Add argument `compress` for indicating whether to save compressed
+  RDS files or not; default is *not* to compress (so bigger files, but
+  faster to write/read).
+
+
 ## qtl2cl 0.5-3 (2017-06-05)
 
 ### Minor changes

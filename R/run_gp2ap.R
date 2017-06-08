@@ -9,6 +9,7 @@
 #' (If \code{0}, use \code{\link[parallel]{detectCores}}.)
 #' Alternatively, this can be links to a set of cluster sockets, as
 #' produced by \code{\link[parallel]{makeCluster}}.
+#' @param compress If TRUE, save a compressed RDS file (smaller but slower).
 #'
 #' @importFrom qtl2geno genoprob_to_alleleprob
 #' @export
@@ -20,9 +21,9 @@
 #' \dontrun{run_calcgenoprob("b6btbr.rds", "b6btbr_probs.rds")}
 #' \dontrun{run_gp2ap("b6btbr_probs.rds", "b6btbr_aprobs.rds")}
 run_gp2ap <-
-    function(input_file, output_file, cores=1)
+    function(input_file, output_file, cores=1, compress=FALSE)
 {
     saveRDS( qtl2geno::genoprob_to_alleleprob( readRDS(input_file),
                                               quiet=TRUE, cores=cores),
-            file=output_file)
+            file=output_file, compress=compress)
 }

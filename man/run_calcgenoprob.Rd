@@ -6,7 +6,8 @@
 \usage{
 run_calcgenoprob(cross_file, output_file, map_file = NULL, step = 0,
   off_end = 0, stepwidth = c("fixed", "max"), error_prob = 0.0001,
-  map_function = c("haldane", "kosambi", "c-f", "morgan"), cores = 1)
+  map_function = c("haldane", "kosambi", "c-f", "morgan"), cores = 1,
+  compress = FALSE)
 }
 \arguments{
 \item{cross_file}{Character string with path to RDS file containing cross}
@@ -36,6 +37,8 @@ use to convert genetic distances to recombination fractions.}
 (If \code{0}, use \code{\link[parallel]{detectCores}}.)
 Alternatively, this can be links to a set of cluster sockets, as
 produced by \code{\link[parallel]{makeCluster}}.}
+
+\item{compress}{If TRUE, save compressed RDS files (smaller but slower).}
 }
 \description{
 Run calc_genoprob and save result to rds

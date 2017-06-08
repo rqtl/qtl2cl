@@ -19,6 +19,7 @@
 #' (If \code{0}, use \code{\link[parallel]{detectCores}}.)
 #' Alternatively, this can be links to a set of cluster sockets, as
 #' produced by \code{\link[parallel]{makeCluster}}.
+#' @param compress If TRUE, save a compressed RDS file (smaller but slower).
 #'
 #' @importFrom qtl2geno calc_kinship
 #' @export
@@ -32,12 +33,12 @@
 run_calckinship <-
     function(input_file, output_file, type=c("overall", "loco", "chr"),
              omit_x=FALSE,
-             use_allele_probs=TRUE, cores=1)
+             use_allele_probs=TRUE, cores=1, compress=FALSE)
 {
     type <- match.arg(type)
 
     saveRDS( qtl2geno::calc_kinship( readRDS(input_file), type=type,
                                     omit_x=omit_x, use_allele_probs=use_allele_probs,
                                     quiet=TRUE, cores=cores),
-            file=output_file)
+            file=output_file, compress=compress )
 }

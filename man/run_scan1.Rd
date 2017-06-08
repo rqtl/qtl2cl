@@ -6,7 +6,8 @@
 \usage{
 run_scan1(genoprobs_file, pheno_file, output_file = NULL, map_file = NULL,
   kinship_file = NULL, addcovar_file = NULL, Xcovar_file = NULL,
-  intcovar_file = NULL, weights_file = NULL, reml = TRUE, cores = 1)
+  intcovar_file = NULL, weights_file = NULL, reml = TRUE, cores = 1,
+  compress = FALSE)
 }
 \arguments{
 \item{genoprobs_file}{Name of file with genotype probabilities}
@@ -30,6 +31,8 @@ run_scan1(genoprobs_file, pheno_file, output_file = NULL, map_file = NULL,
 \item{reml}{If TRUE, use REML; otherwise, use maximum likelihood}
 
 \item{cores}{Number of CPU cores to use}
+
+\item{compress}{If TRUE, save a compressed RDS file (smaller but slower).}
 }
 \description{
 Read in a bunch of data and then run \code{\link[qtl2scan]{scan1}}.

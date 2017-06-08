@@ -4,7 +4,7 @@
 \alias{run_gp2ap}
 \title{Run genoprob_to_alleleprob}
 \usage{
-run_gp2ap(input_file, output_file, cores = 1)
+run_gp2ap(input_file, output_file, cores = 1, compress = FALSE)
 }
 \arguments{
 \item{input_file}{Name of input file (should be RDS)}
@@ -15,6 +15,8 @@ run_gp2ap(input_file, output_file, cores = 1)
 (If \code{0}, use \code{\link[parallel]{detectCores}}.)
 Alternatively, this can be links to a set of cluster sockets, as
 produced by \code{\link[parallel]{makeCluster}}.}
+
+\item{compress}{If TRUE, save a compressed RDS file (smaller but slower).}
 }
 \description{
 Read in genotype probabilities, convert them to allele

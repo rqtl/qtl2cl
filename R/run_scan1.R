@@ -13,6 +13,7 @@
 #' @param weights_file Optional file containing covariates
 #' @param reml If TRUE, use REML; otherwise, use maximum likelihood
 #' @param cores Number of CPU cores to use
+#' @param compress If TRUE, save a compressed RDS file (smaller but slower).
 #'
 #' @importFrom qtl2scan scan1
 #' @importFrom qtl2convert scan_qtl2_to_qtl
@@ -28,7 +29,8 @@ run_scan1 <-
              intcovar_file=NULL,
              weights_file=NULL,
              reml=TRUE,
-             cores=1)
+             cores=1,
+             compress=FALSE)
 {
     # read file if not NULL; otherwise pass along the NULL
     read_file0 <-
@@ -66,6 +68,6 @@ run_scan1 <-
         cat(jsonlite::toJSON(tab), "\n")
     }
     else {
-        saveRDS(result, file=output_file)
+        saveRDS(result, file=output_file, compress=compress)
     }
 }
