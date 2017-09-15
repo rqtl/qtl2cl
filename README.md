@@ -15,13 +15,13 @@ a command-line interface to a restricted set of
 You first need to install R/qtl2 using the following. (For more
 detail, see the instructions at <http://kbroman.org/qtl2/>.)
 
-    install.packages("qtl2", repos="http://rqtl.org/qtl2cran")
+    install.packages("qtl2", repos="https://rqtl.org/qtl2cran")
 
 You then need to install the [qtl2cl](https://github.com/rqtl/qtl2cl)
 package. The [optparse](https://CRAN.R-project.org/package=optparse) package
 will also be installed.
 
-    install.packages("qtl2cl", repos="http://rqtl.org/qtl2cran")
+    install.packages("qtl2cl", repos="https://rqtl.org/qtl2cran")
 
 The command-line script will be located at
 `$R_LIBS/qtl2cl/scripts/qtl2cl` where `$R_LIBS` is the path to the R
