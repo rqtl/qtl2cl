@@ -4,16 +4,17 @@
 
 [![Build Status](https://travis-ci.org/rqtl/qtl2cl.svg?branch=master)](https://travis-ci.org/rqtl/qtl2cl)
 
-[qtl2cl](https://github.com/rqtl/qtl2cl) is an R package that provides
-a command-line interface to a restricted set of
+[qtl2cl](https://github.com/rqtl/qtl2cl) is part of [R/qtl2](http://kbroman.org/qtl2).
+It provides a command-line interface to a restricted set of
 [R/qtl2](http://kbroman.org/qtl2) functions.
 
 ---
 
 ### Installation
 
-You first need to install R/qtl2 using the following. (For more
-detail, see the instructions at <http://kbroman.org/qtl2/>.)
+Make sure you have the latest version of [R (3.4.2)](https://cran.r-project.org).
+Then install R/qtl2 using the following. (For more
+detail, see the instructions at <http://kbroman.org/qtl2>.)
 
     install.packages("qtl2", repos="https://rqtl.org/qtl2cran")
 
