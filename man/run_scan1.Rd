@@ -35,5 +35,5 @@ run_scan1(genoprobs_file, pheno_file, output_file = NULL, map_file = NULL,
 \item{compress}{If TRUE, save a compressed RDS file (smaller but slower).}
 }
 \description{
-Read in a bunch of data and then run \code{\link[qtl2scan]{scan1}}.
+Read in a bunch of data and then run \code{\link[qtl2:scan1]{qtl2::scan1()}}.
 }

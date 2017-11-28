@@ -8,7 +8,7 @@ cross2rds(input_file, output_file, compress = FALSE)
 }
 \arguments{
 \item{input_file}{Character string with path to the
-\href{http://www.yaml.org}{YAML} or \href{http://www.json.org/}{JSON} file containing all of the control
+\href{http://www.yaml.org}{YAML} or \href{http://www.json.org}{JSON} file containing all of the control
 information. This could instead be a zip file containing all of the
 data files, in which case the contents are unzipped to a temporary
 directory and then read.}

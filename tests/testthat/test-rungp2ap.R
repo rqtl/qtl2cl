@@ -2,7 +2,7 @@ context("run_gp2ap")
 
 test_that("run_gp2ap works", {
 
-    cross_file <- system.file("extdata", "grav2.zip", package="qtl2geno")
+    cross_file <- system.file("extdata", "grav2.zip", package="qtl2")
     cross_rdsfile <- paste0(tempfile(), ".rds")
     prob_file <- paste0(tempfile(), ".rds")
     aprob_file <- paste0(tempfile(), ".rds")
@@ -12,7 +12,7 @@ test_that("run_gp2ap works", {
     run_gp2ap(prob_file, aprob_file)
 
     pr <- readRDS(prob_file)
-    apr <- qtl2geno::genoprob_to_alleleprob(pr)
+    apr <- qtl2::genoprob_to_alleleprob(pr)
 
     expect_equal(readRDS(aprob_file), apr)
 

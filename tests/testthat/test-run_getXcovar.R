@@ -2,7 +2,7 @@ context("run_getXcovar")
 
 test_that("run_getXcovar works", {
 
-    infile <- system.file("extdata", "iron.zip", package="qtl2geno")
+    infile <- system.file("extdata", "iron.zip", package="qtl2")
     rdsfile <- paste0(tempfile(), ".rds")
     cross2rds(infile, rdsfile)
 
@@ -11,7 +11,7 @@ test_that("run_getXcovar works", {
     xcovar_file <- paste0(tempfile(), ".rds")
     run_getXcovar(rdsfile, xcovar_file)
 
-    expect_equal(readRDS(xcovar_file), qtl2geno::get_x_covar(cross))
+    expect_equal(readRDS(xcovar_file), qtl2::get_x_covar(cross))
 
     unlink(rdsfile)
     unlink(xcovar_file)

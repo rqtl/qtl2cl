@@ -2,11 +2,13 @@
 #'
 #' Read cross from RDS file, determine X chromosome covariates, and write to another RDS file.
 #'
+#' @md
+#'
 #' @param input_file Input RDS file for cross
 #' @param output_file Output RDS file for X chromosome covariates
 #' @param compress If TRUE, save a compressed RDS file (smaller but slower).
 #'
-#' @importFrom qtl2geno get_x_covar
+#' @importFrom qtl2 get_x_covar
 #' @export
 #'
 #' @examples
@@ -17,5 +19,5 @@
 run_getXcovar <-
     function(input_file, output_file, compress=FALSE)
 {
-    saveRDS( qtl2geno::get_x_covar( readRDS(input_file) ), file=output_file, compress=compress )
+    saveRDS( qtl2::get_x_covar( readRDS(input_file) ), file=output_file, compress=compress )
 }

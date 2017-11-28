@@ -3,25 +3,27 @@
 #' Calculate genetic similarity among individuals (kinship matrix)
 #' from conditional genotype probabilities.
 #'
+#' @md
+#'
 #' @param input_file Input RDS file containing genotype or allele probabilities
 #' @param output_file Output RDS file for calculated kinship matrix
 #' @param type Indicates whether to calculate the overall kinship
-#' (\code{"overall"}, using all chromosomes), the kinship matrix
-#' leaving out one chromosome at a time (\code{"loco"}), or the
-#' kinship matrix for each chromosome (\code{"chr"}).
-#' @param omit_x If \code{TRUE}, only use the autosomes; ignored when
-#' \code{type="chr"}.
-#' @param use_allele_probs If \code{TRUE}, assess similarity with
+#' (`"overall"`, using all chromosomes), the kinship matrix
+#' leaving out one chromosome at a time (`"loco"`), or the
+#' kinship matrix for each chromosome (`"chr"`).
+#' @param omit_x If `TRUE`, only use the autosomes; ignored when
+#' `type="chr"`.
+#' @param use_allele_probs If `TRUE`, assess similarity with
 #' allele probabilities (that is, first run
-#' \code{\link{genoprob_to_alleleprob}}); otherwise use the genotype
+#' [qtl2::genoprob_to_alleleprob()]); otherwise use the genotype
 #' probabilities.
 #' @param cores Number of CPU cores to use, for parallel calculations.
-#' (If \code{0}, use \code{\link[parallel]{detectCores}}.)
+#' (If `0`, use [parallel::detectCores()].)
 #' Alternatively, this can be links to a set of cluster sockets, as
-#' produced by \code{\link[parallel]{makeCluster}}.
+#' produced by [parallel::makeCluster()].
 #' @param compress If TRUE, save a compressed RDS file (smaller but slower).
 #'
-#' @importFrom qtl2geno calc_kinship
+#' @importFrom qtl2 calc_kinship
 #' @export
 #'
 #' @examples
@@ -37,8 +39,8 @@ run_calckinship <-
 {
     type <- match.arg(type)
 
-    saveRDS( qtl2geno::calc_kinship( readRDS(input_file), type=type,
-                                    omit_x=omit_x, use_allele_probs=use_allele_probs,
-                                    quiet=TRUE, cores=cores),
+    saveRDS( qtl2::calc_kinship( readRDS(input_file), type=type,
+                                omit_x=omit_x, use_allele_probs=use_allele_probs,
+                                quiet=TRUE, cores=cores),
             file=output_file, compress=compress )
 }

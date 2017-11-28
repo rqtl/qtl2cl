@@ -2,7 +2,7 @@ context("run_calckinship")
 
 test_that("run_calckinship works", {
 
-    cross_file <- system.file("extdata", "grav2.zip", package="qtl2geno")
+    cross_file <- system.file("extdata", "grav2.zip", package="qtl2")
     cross_rdsfile <- paste0(tempfile(), ".rds")
     prob_file <- paste0(tempfile(), ".rds")
     kinship_file <- paste0(tempfile(), ".rds")
@@ -12,7 +12,7 @@ test_that("run_calckinship works", {
     run_calckinship(prob_file, kinship_file, type="loco")
 
     pr <- readRDS(prob_file)
-    k <- qtl2geno::calc_kinship(pr, "loco")
+    k <- qtl2::calc_kinship(pr, "loco")
 
     expect_equal(readRDS(kinship_file), k)
 

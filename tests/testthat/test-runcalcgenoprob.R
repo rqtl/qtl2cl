@@ -2,7 +2,7 @@ context("run_calcgenoprob")
 
 test_that("run_calcgenoprob works", {
 
-    cross_file <- system.file("extdata", "grav2.zip", package="qtl2geno")
+    cross_file <- system.file("extdata", "grav2.zip", package="qtl2")
     cross_rdsfile <- paste0(tempfile(), ".rds")
     outfile <- paste0(tempfile(), ".rds")
 
@@ -11,8 +11,8 @@ test_that("run_calcgenoprob works", {
     run_calcgenoprob(cross_rdsfile, outfile, step=1, error_prob=0.002, map_function="c-f")
 
     cross <- readRDS(cross_rdsfile)
-    map <- qtl2geno::insert_pseudomarkers(cross$gmap, step=1)
-    pr <- qtl2geno::calc_genoprob(cross, map, error_prob=0.002, map_function="c-f")
+    map <- qtl2::insert_pseudomarkers(cross$gmap, step=1)
+    pr <- qtl2::calc_genoprob(cross, map, error_prob=0.002, map_function="c-f")
 
     expect_equal(readRDS(outfile), pr)
 

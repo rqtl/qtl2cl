@@ -3,15 +3,17 @@
 #' Read in genotype probabilities, convert them to allele
 #' probabilities, and write them back out.
 #'
+#' @md
+#'
 #' @param input_file Name of input file (should be RDS)
 #' @param output_file Name of output file (will be RDS)
 #' @param cores Number of CPU cores to use, for parallel calculations.
-#' (If \code{0}, use \code{\link[parallel]{detectCores}}.)
+#' (If `0`, use [parallel::detectCores()].)
 #' Alternatively, this can be links to a set of cluster sockets, as
-#' produced by \code{\link[parallel]{makeCluster}}.
+#' produced by [parallel::makeCluster()].
 #' @param compress If TRUE, save a compressed RDS file (smaller but slower).
 #'
-#' @importFrom qtl2geno genoprob_to_alleleprob
+#' @importFrom qtl2 genoprob_to_alleleprob
 #' @export
 #'
 #' @examples
@@ -23,7 +25,7 @@
 run_gp2ap <-
     function(input_file, output_file, cores=1, compress=FALSE)
 {
-    saveRDS( qtl2geno::genoprob_to_alleleprob( readRDS(input_file),
-                                              quiet=TRUE, cores=cores),
+    saveRDS( qtl2::genoprob_to_alleleprob( readRDS(input_file),
+                                          quiet=TRUE, cores=cores),
             file=output_file, compress=compress)
 }

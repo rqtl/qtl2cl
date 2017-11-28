@@ -21,14 +21,14 @@ Read a file that is either RDS, CSV, JSON, or YAML, with the method
 determined by the file extension.
 }
 \details{
-For CSV files, we use \code{\link[qtl2geno]{read_csv}},
-which calls \code{\link[data.table]{fread}} with a particular set
+For CSV files, we use \code{\link[qtl2:read_csv]{qtl2::read_csv()}},
+which calls \code{\link[data.table:fread]{data.table::fread()}} with a particular set
 of options; note that columns are forced to be numeric in this
 case.
-For RDS files, we use \code{\link[base]{readRDS}}. For JSON files,
-we use \code{\link[base]{readLines}} and
-\code{\link[jsonlite]{fromJSON}}. For YAML files, we use
-\code{\link[yaml]{yaml.load_file}}.
+For RDS files, we use \code{\link[base:readRDS]{base::readRDS()}}. For JSON files,
+we use \code{\link[base:readLines]{base::readLines()}} and
+\code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}. For YAML files, we use
+\code{\link[yaml:yaml.load_file]{yaml::yaml.load_file()}}.
 }
 \examples{
 \dontrun{w <- read_file("myfile.rds")

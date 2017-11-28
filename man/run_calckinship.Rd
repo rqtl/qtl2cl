@@ -22,13 +22,13 @@ kinship matrix for each chromosome (\code{"chr"}).}
 
 \item{use_allele_probs}{If \code{TRUE}, assess similarity with
 allele probabilities (that is, first run
-\code{\link{genoprob_to_alleleprob}}); otherwise use the genotype
+\code{\link[qtl2:genoprob_to_alleleprob]{qtl2::genoprob_to_alleleprob()}}); otherwise use the genotype
 probabilities.}
 
 \item{cores}{Number of CPU cores to use, for parallel calculations.
-(If \code{0}, use \code{\link[parallel]{detectCores}}.)
+(If \code{0}, use \code{\link[parallel:detectCores]{parallel::detectCores()}}.)
 Alternatively, this can be links to a set of cluster sockets, as
-produced by \code{\link[parallel]{makeCluster}}.}
+produced by \code{\link[parallel:makeCluster]{parallel::makeCluster()}}.}
 
 \item{compress}{If TRUE, save a compressed RDS file (smaller but slower).}
 }

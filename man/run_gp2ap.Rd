@@ -12,9 +12,9 @@ run_gp2ap(input_file, output_file, cores = 1, compress = FALSE)
 \item{output_file}{Name of output file (will be RDS)}
 
 \item{cores}{Number of CPU cores to use, for parallel calculations.
-(If \code{0}, use \code{\link[parallel]{detectCores}}.)
+(If \code{0}, use \code{\link[parallel:detectCores]{parallel::detectCores()}}.)
 Alternatively, this can be links to a set of cluster sockets, as
-produced by \code{\link[parallel]{makeCluster}}.}
+produced by \code{\link[parallel:makeCluster]{parallel::makeCluster()}}.}
 
 \item{compress}{If TRUE, save a compressed RDS file (smaller but slower).}
 }
