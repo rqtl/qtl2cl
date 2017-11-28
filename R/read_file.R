@@ -3,25 +3,27 @@
 #' Read a file that is either RDS, CSV, JSON, or YAML, with the method
 #' determined by the file extension.
 #'
+#' @md
+#'
 #' @param file Character string of input file; must have file
-#' extension \code{.rds}, \code{.csv}, \code{.json}, or \code{.yaml}.
+#' extension `.rds`, `.csv`, `.json`, or `.yaml`.
 #' @param ... Passed to whatever function it calls
 #'
 #' @return Could be most anything; whatever gets read in by the
 #' corresponding R function for the file type. See Details.
 #'
-#' @details For CSV files, we use \code{\link[qtl2geno]{read_csv}},
-#' which calls \code{\link[data.table]{fread}} with a particular set
+#' @details For CSV files, we use [qtl2::read_csv()],
+#' which calls [data.table::fread()] with a particular set
 #' of options; note that columns are forced to be numeric in this
 #' case.
-#' For RDS files, we use \code{\link[base]{readRDS}}. For JSON files,
-#' we use \code{\link[base]{readLines}} and
-#' \code{\link[jsonlite]{fromJSON}}. For YAML files, we use
-#' \code{\link[yaml]{yaml.load_file}}.
+#' For RDS files, we use [base::readRDS()]. For JSON files,
+#' we use [base::readLines()] and
+#' [jsonlite::fromJSON()]. For YAML files, we use
+#' [yaml::yaml.load_file()].
 #'
 #' @importFrom jsonlite fromJSON
 #' @importFrom yaml yaml.load_file
-#' @importFrom qtl2geno read_csv
+#' @importFrom qtl2 read_csv
 #' @importFrom optparse make_option
 #' @export
 #'
@@ -36,7 +38,7 @@ read_file <-
     tmp <- strsplit(file, "\\.")[[1]]
     file_extension <- tmp[length(tmp)]
     result <- switch(file_extension,
-                     "csv" = qtl2geno::read_csv(file, ...),
+                     "csv" = qtl2::read_csv(file, ...),
                      "rds" = readRDS(file),
                      "json" = jsonlite::fromJSON( readLines(file) ),
                      "yaml" = yaml::yaml.load_file(file),

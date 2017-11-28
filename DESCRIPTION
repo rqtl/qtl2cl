@@ -1,6 +1,6 @@
 Package: qtl2cl
-Version: 0.5-5
-Date: 2017-09-15
+Version: 0.7-1
+Date: 2017-11-28
 Title: Command-Line Interface for R/qtl2
 Description: Support for a command-line interface for R/qtl2.
 Author: Karl W Broman
@@ -8,9 +8,8 @@ Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 Depends:
     R (>= 3.1.0)
 Imports:
-    qtl2geno (>= 0.5-4),
-    qtl2scan (>= 0.5-4),
-    qtl2convert (>= 0.5-1),
+    qtl2 (>= 0.7-1),
+    qtl2convert (>= 0.7-1),
     optparse,
     jsonlite,
     yaml
@@ -24,6 +23,5 @@ LazyData: true
 Encoding: UTF-8
 RoxygenNote: 6.0.1
 Remotes:
-    rqtl/qtl2geno,
-    rqtl/qtl2plot,
+    rqtl/qtl2,
     rqtl/qtl2convert

@@ -1,11 +1,13 @@
 #' Run scan1
 #'
-#' Read in a bunch of data and then run \code{\link[qtl2scan]{scan1}}.
+#' Read in a bunch of data and then run [qtl2::scan1()].
+#'
+#' @md
 #'
 #' @param genoprobs_file Name of file with genotype probabilities
 #' @param pheno_file Name of file with phenotypes
 #' @param output_file Optional output RDS file. If NULL, print output as a table.
-#' @param map_file Optional (RDS) file containing map. Needed if \code{output_file} is NULL.
+#' @param map_file Optional (RDS) file containing map. Needed if `output_file` is NULL.
 #' @param kinship_file Optional file containing kinship matrix
 #' @param addcovar_file Optional file containing additive covariates
 #' @param Xcovar_file Optional file containing X chromosome covariates
@@ -15,7 +17,7 @@
 #' @param cores Number of CPU cores to use
 #' @param compress If TRUE, save a compressed RDS file (smaller but slower).
 #'
-#' @importFrom qtl2scan scan1
+#' @importFrom qtl2 scan1
 #' @importFrom qtl2convert scan_qtl2_to_qtl
 #' @export
 run_scan1 <-
@@ -40,14 +42,14 @@ run_scan1 <-
             else return(read_file(filename))
         }
 
-    result <- qtl2scan::scan1(genoprobs=read_file(genoprobs_file),
-                              pheno=read_file(pheno_file),
-                              kinship=read_file0(kinship_file),
-                              addcovar=read_file0(addcovar_file),
-                              Xcovar=read_file0(Xcovar_file),
-                              intcovar=read_file0(intcovar_file),
-                              weights=read_file0(weights_file),
-                              reml=reml, cores=cores)
+    result <- qtl2::scan1(genoprobs=read_file(genoprobs_file),
+                          pheno=read_file(pheno_file),
+                          kinship=read_file0(kinship_file),
+                          addcovar=read_file0(addcovar_file),
+                          Xcovar=read_file0(Xcovar_file),
+                          intcovar=read_file0(intcovar_file),
+                          weights=read_file0(weights_file),
+                          reml=reml, cores=cores)
 
     if(is.null(output_file)) {
         if(!is.null(map_file) && map_file != "") {
