@@ -2,7 +2,7 @@ context("run_scan1")
 
 test_that("run_scan1 works", {
 
-    cross_file <- system.file("extdata", "grav2.zip", package="qtl2geno")
+    cross_file <- system.file("extdata", "grav2.zip", package="qtl2")
     cross_rdsfile <- paste0(tempfile(), ".rds")
     prob_file <- paste0(tempfile(), ".rds")
     pheno_file <- paste0(tempfile(), ".rds")
@@ -16,7 +16,7 @@ test_that("run_scan1 works", {
     run_scan1(prob_file, pheno_file, out_file)
 
     pr <- readRDS(prob_file)
-    out <- qtl2scan::scan1(pr, cross$pheno)
+    out <- qtl2::scan1(pr, cross$pheno)
 
     expect_equal(readRDS(out_file), out)
 
