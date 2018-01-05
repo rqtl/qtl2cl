@@ -1,6 +1,6 @@
 Package: qtl2cl
-Version: 0.7-1
-Date: 2017-11-28
+Version: 0.8
+Date: 2018-01-05
 Title: Command-Line Interface for R/qtl2
 Description: Support for a command-line interface for R/qtl2.
 Author: Karl W Broman
@@ -8,8 +8,8 @@ Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 Depends:
     R (>= 3.1.0)
 Imports:
-    qtl2 (>= 0.7-1),
-    qtl2convert (>= 0.7-1),
+    qtl2 (>= 0.8),
+    qtl2convert (>= 0.8),
     optparse,
     jsonlite,
     yaml

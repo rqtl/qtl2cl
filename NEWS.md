@@ -1,3 +1,8 @@
+## qtl2cl 0.8 (2018-01-05)
+
+- First formal release
+
+
 ## qtl2cl 0.5-4 (2017-06-07)
 
 ### New features
