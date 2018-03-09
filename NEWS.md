@@ -1,3 +1,8 @@
+## qtl2cl 0.14 (2018-03-09)
+
+- No real changes; just keeping in sync with the qtl2 package.
+
+
 ## qtl2cl 0.12 (2018-01-19)
 
 - Again, no actual changes; just keeping in sync with the qtl2 package.
