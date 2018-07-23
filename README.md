@@ -1,28 +1,28 @@
 ## qtl2cl
 
-[Karl Broman](http://kbroman.org)
+[Karl Broman](https://kbroman.org)
 
 [![Build Status](https://travis-ci.org/rqtl/qtl2cl.svg?branch=master)](https://travis-ci.org/rqtl/qtl2cl)
 
-[qtl2cl](https://github.com/rqtl/qtl2cl) is part of [R/qtl2](http://kbroman.org/qtl2).
+[qtl2cl](https://github.com/rqtl/qtl2cl) is part of [R/qtl2](https://kbroman.org/qtl2).
 It provides a command-line interface to a restricted set of
-[R/qtl2](http://kbroman.org/qtl2) functions.
+[R/qtl2](https://kbroman.org/qtl2) functions.
 
 ---
 
 ### Installation
 
-Make sure you have the latest version of [R (3.4.4)](https://cran.r-project.org).
+Make sure you have the latest version of [R](https://cran.r-project.org).
 Then install R/qtl2 using the following. (For more
-detail, see the instructions at <http://kbroman.org/qtl2>.)
+detail, see the instructions at <https://kbroman.org/qtl2>.)
 
-    install.packages("qtl2", repos="https://rqtl.org/qtl2cran")
+    install.packages("qtl2", repos="http://rqtl.org/qtl2cran")
 
 You then need to install the [qtl2cl](https://github.com/rqtl/qtl2cl)
 package. The [optparse](https://CRAN.R-project.org/package=optparse) package
 will also be installed.
 
-    install.packages("qtl2cl", repos="https://rqtl.org/qtl2cran")
+    install.packages("qtl2cl", repos="http://rqtl.org/qtl2cran")
 
 The command-line script will be located at
 `$R_LIBS/qtl2cl/scripts/qtl2cl` where `$R_LIBS` is the path to the R
