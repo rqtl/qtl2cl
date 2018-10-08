@@ -4,7 +4,7 @@ Date: 2018-07-23
 Title: Command-Line Interface for R/qtl2
 Description: Support for a command-line interface for R/qtl2.
 Author: Karl W Broman
-Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
+Maintainer: Karl W Broman <broman@wisc.edu>
 Depends:
     R (>= 3.1.0)
 Imports:
