@@ -2,8 +2,6 @@
 #'
 #' Read cross files and save as rds
 #'
-#' @md
-#'
 #' @param input_file Character string with path to the
 #' [YAML](http://www.yaml.org) or [JSON](http://www.json.org) file containing all of the control
 #' information. This could instead be a zip file containing all of the

@@ -3,8 +3,6 @@
 #' Calculate genetic similarity among individuals (kinship matrix)
 #' from conditional genotype probabilities.
 #'
-#' @md
-#'
 #' @param input_file Input RDS file containing genotype or allele probabilities
 #' @param output_file Output RDS file for calculated kinship matrix
 #' @param type Indicates whether to calculate the overall kinship

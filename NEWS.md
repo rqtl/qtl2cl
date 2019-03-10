@@ -1,3 +1,8 @@
+## qtl2cl 0.19-1 (2019-03-10)
+
+- Use Markdown for function documentation, throughout
+
+
 ## qtl2cl 0.16 (2018-07-23)
 
 - No real changes; just keeping in sync with the qtl2 package.

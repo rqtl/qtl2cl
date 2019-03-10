@@ -1,7 +1,5 @@
 #' @keywords internal
 #'
-#' @md
-#'
 #' @section Vignettes:
 #' * [user guide](http://kbroman.org/qtl2/assets/vignettes/user_guide.html)
 #' * [input file formats](http://kbroman.org/qtl2/assets/vignettes/input_files.html)

@@ -2,8 +2,6 @@
 #'
 #' Read in a bunch of data and then run [qtl2::scan1()].
 #'
-#' @md
-#'
 #' @param genoprobs_file Name of file with genotype probabilities
 #' @param pheno_file Name of file with phenotypes
 #' @param output_file Optional output RDS file. If NULL, print output as a table.

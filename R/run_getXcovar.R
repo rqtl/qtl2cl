@@ -2,8 +2,6 @@
 #'
 #' Read cross from RDS file, determine X chromosome covariates, and write to another RDS file.
 #'
-#' @md
-#'
 #' @param input_file Input RDS file for cross
 #' @param output_file Output RDS file for X chromosome covariates
 #' @param compress If TRUE, save a compressed RDS file (smaller but slower).

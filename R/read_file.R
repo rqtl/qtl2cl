@@ -3,8 +3,6 @@
 #' Read a file that is either RDS, CSV, JSON, or YAML, with the method
 #' determined by the file extension.
 #'
-#' @md
-#'
 #' @param file Character string of input file; must have file
 #' extension `.rds`, `.csv`, `.json`, or `.yaml`.
 #' @param ... Passed to whatever function it calls

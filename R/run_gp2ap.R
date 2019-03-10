@@ -3,8 +3,6 @@
 #' Read in genotype probabilities, convert them to allele
 #' probabilities, and write them back out.
 #'
-#' @md
-#'
 #' @param input_file Name of input file (should be RDS)
 #' @param output_file Name of output file (will be RDS)
 #' @param cores Number of CPU cores to use, for parallel calculations.

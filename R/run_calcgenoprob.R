@@ -2,8 +2,6 @@
 #'
 #' Run calc_genoprob and save result to rds
 #'
-#' @md
-#'
 #' @param cross_file Character string with path to RDS file containing cross
 #' @param output_file Character string with path to RDS file for output
 #' @param map_file Character string with path to RDS file for writing genetic map
