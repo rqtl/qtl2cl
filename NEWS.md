@@ -1,4 +1,4 @@
-## qtl2cl 0.19-1 (2019-03-10)
+## qtl2cl 0.20 (2019-06-03)
 
 - Use Markdown for function documentation, throughout
 
