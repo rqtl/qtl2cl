@@ -1,6 +1,6 @@
 Package: qtl2cl
-Version: 0.19-1
-Date: 2019-03-10
+Version: 0.20
+Date: 2019-06-03
 Title: Command-Line Interface for R/qtl2
 Description: Support for a command-line interface for R/qtl2.
 Author: Karl W Broman [aut, cre] (<https://orcid.org/0000-0002-4914-6671>)
