@@ -28,7 +28,7 @@ case.
 For RDS files, we use \code{\link[base:readRDS]{base::readRDS()}}. For JSON files,
 we use \code{\link[base:readLines]{base::readLines()}} and
 \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}. For YAML files, we use
-\code{\link[yaml:yaml.load_file]{yaml::yaml.load_file()}}.
+\code{\link[yaml:yaml.load]{yaml::yaml.load_file()}}.
 }
 \examples{
 \dontrun{w <- read_file("myfile.rds")

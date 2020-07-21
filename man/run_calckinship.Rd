@@ -4,9 +4,15 @@
 \alias{run_calckinship}
 \title{Calculate kinship matrix}
 \usage{
-run_calckinship(input_file, output_file, type = c("overall", "loco",
-  "chr"), omit_x = FALSE, use_allele_probs = TRUE, cores = 1,
-  compress = FALSE)
+run_calckinship(
+  input_file,
+  output_file,
+  type = c("overall", "loco", "chr"),
+  omit_x = FALSE,
+  use_allele_probs = TRUE,
+  cores = 1,
+  compress = FALSE
+)
 }
 \arguments{
 \item{input_file}{Input RDS file containing genotype or allele probabilities}
