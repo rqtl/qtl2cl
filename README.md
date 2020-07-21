@@ -12,17 +12,14 @@ It provides a command-line interface to a restricted set of
 
 ### Installation
 
-Make sure you have the latest version of [R](https://cran.r-project.org).
-Then install R/qtl2 using the following. (For more
-detail, see the instructions at <https://kbroman.org/qtl2>.)
+Install the package dependencies from [CRAN](https://cran.r-project.org).
 
-    install.packages("qtl2", repos="https://rqtl.org/qtl2cran")
+    install.packages(c("jsonlite", "yaml", "optparse", "qtl2", "qtl2convert", "devtools"))
 
-You then need to install the [qtl2cl](https://github.com/rqtl/qtl2cl)
-package. The [optparse](https://CRAN.R-project.org/package=optparse) package
-will also be installed.
+Install [qtl2cl](https://github.com/rqtl/qtl2cl) from GitHub using the
+[devtools package](https://devtools.r-lib.org).
 
-    install.packages("qtl2cl", repos="https://rqtl.org/qtl2cran")
+    devtools::install_github("rqtl/qtl2cl")
 
 The command-line script will be located at
 `$R_LIBS/qtl2cl/scripts/qtl2cl` where `$R_LIBS` is the path to the R
