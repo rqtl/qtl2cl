@@ -14,9 +14,9 @@ It provides a command-line interface to a restricted set of
 
 Install the package dependencies from [CRAN](https://cran.r-project.org).
 
-    install.packages(c("jsonlite", "yaml", "optparse", "qtl2", "qtl2convert", "devtools"))
+    install.packages(c("optparse", "qtl2", "qtl2convert", "devtools"))
 
-Install [qtl2cl](https://github.com/rqtl/qtl2cl) from GitHub using the
+Install [R/qtl2cl](https://github.com/rqtl/qtl2cl) from GitHub using the
 [devtools package](https://devtools.r-lib.org).
 
     devtools::install_github("rqtl/qtl2cl")
