@@ -2,7 +2,7 @@
 
 [Karl Broman](https://kbroman.org)
 
-[![Build Status](https://travis-ci.org/rqtl/qtl2cl.svg?branch=master)](https://travis-ci.org/rqtl/qtl2cl)
+[![R-CMD-check](https://github.com/rqtl/qtl2cl/workflows/R-CMD-check/badge.svg)](https://github.com/rqtl/qtl2cl/actions)
 
 [qtl2cl](https://github.com/rqtl/qtl2cl) is part of [R/qtl2](https://kbroman.org/qtl2).
 It provides a command-line interface to a restricted set of

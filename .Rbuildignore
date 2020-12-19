@@ -1,4 +1,4 @@
 ^LICENSE\.md$
 ^Makefile$
-^\.travis\.yml$
 ^notes\.txt$
+^\.github$
