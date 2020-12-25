@@ -12,14 +12,19 @@ It provides a command-line interface to a restricted set of
 
 ### Installation
 
-Install the package dependencies from [CRAN](https://cran.r-project.org).
-
-    install.packages(c("optparse", "qtl2", "qtl2convert", "devtools"))
-
 Install [R/qtl2cl](https://github.com/rqtl/qtl2cl) from GitHub using the
-[devtools package](https://devtools.r-lib.org).
+[remotes package](https://remotes.r-lib.org).
 
-    devtools::install_github("rqtl/qtl2cl")
+    install.packages("remotes")
+
+Then install [R/qtl2cl](https://github.com/rqtl/qtl2cl) with `install_github`:
+
+    remotes::install_github("rqtl/qtl2cl")
+
+The package dependencies (including [R/qtl2](https://kbroman.org/qtl2/),
+[R/qtl2convert](https://github.com/rqtl/qtl2convert), and
+[optparse](https://cran.r-project.org/package=optparse))
+will also be installed.
 
 The command-line script will be located at
 `$R_LIBS/qtl2cl/scripts/qtl2cl` where `$R_LIBS` is the path to the R
