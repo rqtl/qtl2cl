@@ -1,3 +1,8 @@
+## qtl2cl 0.23 (2023-08-24)
+
+- Replace calls to `qtl2::read_csv()` which is now `qtl2::fread_csv()`.
+
+
 ## qtl2cl 0.22 (2020-05-21)
 
 - No real changes; just keeping in sync with the qtl2 package.

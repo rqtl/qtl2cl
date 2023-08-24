@@ -1,6 +1,6 @@
 Package: qtl2cl
-Version: 0.22
-Date: 2020-05-21
+Version: 0.23-1
+Date: 2023-08-24
 Title: Command-Line Interface for R/qtl2
 Description: Support for a command-line interface for R/qtl2.
 Author: Karl W Broman [aut, cre] (<https://orcid.org/0000-0002-4914-6671>)
@@ -10,7 +10,7 @@ Authors@R: c(person("Karl W", "Broman", role=c("aut", "cre"),
 Depends:
     R (>= 3.1.0)
 Imports:
-    qtl2 (>= 0.8),
+    qtl2 (>= 0.33-1),
     qtl2convert (>= 0.8),
     optparse,
     jsonlite,
@@ -24,7 +24,7 @@ URL: https://github.com/rqtl/qtl2cl
 LazyData: true
 Encoding: UTF-8
 ByteCompile: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Roxygen: list(markdown=TRUE)
 Remotes:
     rqtl/qtl2,

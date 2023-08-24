@@ -10,7 +10,7 @@
 #' @return Could be most anything; whatever gets read in by the
 #' corresponding R function for the file type. See Details.
 #'
-#' @details For CSV files, we use [qtl2::read_csv()],
+#' @details For CSV files, we use [qtl2::fread_csv()],
 #' which calls [data.table::fread()] with a particular set
 #' of options; note that columns are forced to be numeric in this
 #' case.
@@ -21,7 +21,7 @@
 #'
 #' @importFrom jsonlite fromJSON
 #' @importFrom yaml yaml.load_file
-#' @importFrom qtl2 read_csv
+#' @importFrom qtl2 fread_csv
 #' @importFrom optparse make_option
 #' @export
 #'
@@ -36,7 +36,7 @@ read_file <-
     tmp <- strsplit(file, "\\.")[[1]]
     file_extension <- tmp[length(tmp)]
     result <- switch(file_extension,
-                     "csv" = qtl2::read_csv(file, ...),
+                     "csv" = qtl2::fread_csv(file, ...),
                      "rds" = readRDS(file),
                      "json" = jsonlite::fromJSON( readLines(file) ),
                      "yaml" = yaml::yaml.load_file(file),

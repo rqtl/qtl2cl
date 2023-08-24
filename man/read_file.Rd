@@ -21,7 +21,7 @@ Read a file that is either RDS, CSV, JSON, or YAML, with the method
 determined by the file extension.
 }
 \details{
-For CSV files, we use \code{\link[qtl2:read_csv]{qtl2::read_csv()}},
+For CSV files, we use \code{\link[qtl2:fread_csv]{qtl2::fread_csv()}},
 which calls \code{\link[data.table:fread]{data.table::fread()}} with a particular set
 of options; note that columns are forced to be numeric in this
 case.
