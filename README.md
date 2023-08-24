@@ -4,9 +4,9 @@
 
 [![R-CMD-check](https://github.com/rqtl/qtl2cl/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rqtl/qtl2cl/actions/workflows/R-CMD-check.yaml)
 
-[qtl2cl](https://github.com/rqtl/qtl2cl) is part of [R/qtl2](https://kbroman.org/qtl2).
+[qtl2cl](https://github.com/rqtl/qtl2cl) is part of [R/qtl2](https://kbroman.org/qtl2/).
 It provides a command-line interface to a restricted set of
-[R/qtl2](https://kbroman.org/qtl2) functions.
+[R/qtl2](https://kbroman.org/qtl2/) functions.
 
 ---
 
