@@ -26,6 +26,3 @@ Encoding: UTF-8
 ByteCompile: true
 RoxygenNote: 7.2.3
 Roxygen: list(markdown=TRUE)
-Remotes:
-    rqtl/qtl2,
-    rqtl/qtl2convert
