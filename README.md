@@ -1,10 +1,11 @@
-## qtl2cl
+## R/qtl2cl
 
 [Karl Broman](https://kbroman.org)
 
 [![R-CMD-check](https://github.com/rqtl/qtl2cl/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rqtl/qtl2cl/actions/workflows/R-CMD-check.yaml)
+[![r-universe badge](https://rqtl.r-universe.dev/qtl2cl/badges/version)](https://rqtl.r-universe.dev/qtl2cl)
 
-[qtl2cl](https://github.com/rqtl/qtl2cl) is part of [R/qtl2](https://kbroman.org/qtl2/).
+[R/qtl2cl](https://github.com/rqtl/qtl2cl) is part of [R/qtl2](https://kbroman.org/qtl2/).
 It provides a command-line interface to a restricted set of
 [R/qtl2](https://kbroman.org/qtl2/) functions.
 
@@ -12,14 +13,23 @@ It provides a command-line interface to a restricted set of
 
 ### Installation
 
-Install [R/qtl2cl](https://github.com/rqtl/qtl2cl) from GitHub using the
-[remotes package](https://remotes.r-lib.org).
+Next, install R/qtl2cl from
+[r-universe](https://rqtl.r-universe.dev/qtl2cl):
 
-    install.packages("remotes")
+```r
+install.packages("qtl2cl", repos=c("https://rqtl.r-universe.dev",
+                                   "https://cloud.r-project.org"))
+```
 
-Then install [R/qtl2cl](https://github.com/rqtl/qtl2cl) with `install_github`:
+Alternatively, install the [remotes package](https://remotes.r-lib.org)
+and use `remotes::install_github()` to install R/qtl2cl from its
+[Github repository](https://github.com/rqtl/qtl2cl).
 
-    remotes::install_github("rqtl/qtl2cl")
+```r
+install.packages("remotes")
+library(remotes)
+install_github("rqtl/qtl2cl")
+```
 
 The package dependencies (including [R/qtl2](https://kbroman.org/qtl2/),
 [R/qtl2convert](https://github.com/rqtl/qtl2convert), and
@@ -32,7 +42,9 @@ packages within your R installation. You may want to add this to your
 `PATH`. Once you've installed the R/qtl2cl package, you can use the following to
 find the path to the `qtl2cl` script.
 
-    Rscript -e "system.file('scripts', 'qtl2cl', package='qtl2cl')"
+```bash
+Rscript -e "system.file('scripts', 'qtl2cl', package='qtl2cl')"
+```
 
 ---
 
@@ -49,7 +61,9 @@ download the
 [B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
 data and save it to a local RDS file.
 
-    qtl2cl --cross2rds --input=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr.zip --output=b6btbr.rds
+```bash
+qtl2cl --cross2rds --input=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr.zip --output=b6btbr.rds
+```
 
 #### Calculate genotype probabilities
 
@@ -73,8 +87,10 @@ data.  We've split
 the command across two lines so that it's easier to read.
 
 
-    qtl2cl --calc_genoprob --input=b6btbr.rds --output=b6btbr_probs.rds --map_file=b6btbr_map.rds \
-       --step=0.5 --stepwidth=max --error_prob=0.002 --map_function=c-f
+```bash
+qtl2cl --calc_genoprob --input=b6btbr.rds --output=b6btbr_probs.rds --map_file=b6btbr_map.rds \
+   --step=0.5 --stepwidth=max --error_prob=0.002 --map_function=c-f
+```
 
 #### Convert genotype probabilities to allele dosages
 
@@ -87,8 +103,9 @@ Here's an example using the
 [B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
 data.
 
-    qtl2cl --genoprob_to_alleleprob --input=b6btbr_probs.rds --output=b6btbr_aprobs.rds
-
+```bash
+qtl2cl --genoprob_to_alleleprob --input=b6btbr_probs.rds --output=b6btbr_aprobs.rds
+```
 
 #### Calculate kinship matrices
 
@@ -106,8 +123,9 @@ Here's an example using the
 [B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
 data.
 
-    qtl2cl --calc_kinship --input=b6btbr_aprobs.rds --output=b6btbr_kinship.rds
-
+```bash
+qtl2cl --calc_kinship --input=b6btbr_aprobs.rds --output=b6btbr_kinship.rds
+```
 
 #### Grab X chromosome covariates
 
@@ -120,7 +138,9 @@ Here's an example using the
 [B6xBTBR intercross](https://github.com/rqtl/qtl2data/blob/master/B6BTBR/ReadMe.md)
 data.
 
-    qtl2cl --get_x_covar --input=b6btbr.rds --output=b6btbr_xcovar.rds
+```bash
+qtl2cl --get_x_covar --input=b6btbr.rds --output=b6btbr_xcovar.rds
+```
 
 #### Perform single-QTL genome scan
 
@@ -150,8 +170,10 @@ long.
 
 In this case, the genome scan results will be saved to an RDS file, `b6btbr_scan.rds`.
 
-    qtl2cl --scan1 --genoprobs=b6btbr_aprobs.rds --Xcovar=b6btbr_xcovar.rds --output=b6btbr_scan.rds \
-        --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv
+```bash
+qtl2cl --scan1 --genoprobs=b6btbr_aprobs.rds --Xcovar=b6btbr_xcovar.rds --output=b6btbr_scan.rds \
+    --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv
+```
 
 Alternatively, if `--output` is not provided, the results are printed
 to STDOUT as a JSON object. In this case, it's best to provide
@@ -159,9 +181,10 @@ to STDOUT as a JSON object. In this case, it's best to provide
 `--calc_genoprob`), so that the JSON output includes chromosome and
 position information.
 
-    qtl2cl --scan1 --genoprobs=b6btbr_aprobs.rds --Xcovar=b6btbr_xcovar.rds --map_file=b6btbr_map.rds \
-        --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv
-
+```bash
+qtl2cl --scan1 --genoprobs=b6btbr_aprobs.rds --Xcovar=b6btbr_xcovar.rds --map_file=b6btbr_map.rds \
+    --pheno=https://raw.githubusercontent.com/rqtl/qtl2data/master/B6BTBR/b6btbr_pheno.csv
+```
 
 ---
 
