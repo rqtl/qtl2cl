@@ -29,5 +29,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Karl W Broman \email{broman@wisc.edu} (\href{https://orcid.org/0000-0002-4914-6671}{ORCID})
 
+Authors:
+\itemize{
+  \item Karl W Broman \email{broman@wisc.edu} (\href{https://orcid.org/0000-0002-4914-6671}{ORCID})
+}
+
 }
 \keyword{internal}
